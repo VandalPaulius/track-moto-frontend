@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import * as appActions from './App.actions';
 import { Styles } from './assets'; // eslint-disable-line
 
 class App extends Component {
@@ -32,5 +34,7 @@ const mapStateToProps = state => ({
   authorized: state.app.authorized,
 });
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(appActions, dispatch) });
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
