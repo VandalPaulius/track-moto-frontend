@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as appActions from './App.actions';
 import { Styles } from './assets'; // eslint-disable-line
+import { Landing } from './components';
 
 class App extends Component {
   render() {
@@ -15,8 +16,8 @@ class App extends Component {
       );
     }
     return (
-      <div className="App">
-        Landing
+      <div>
+        <Landing />
       </div>
     );
   }

@@ -1,0 +1,19 @@
+
+* {
+  -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.authorization {
+  background-color: rgb(59, 59, 59);
+  height: 100%;
+  display: flex;
+  .drawer {
+    flex: 1;
+    &.open {
+      flex: 3;
+      background-color: rgb(97, 96, 96);
+    }
+  }
+}
