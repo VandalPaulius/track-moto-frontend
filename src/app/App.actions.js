@@ -1,10 +1,45 @@
 import * as constants from './App.constants';
 
-function handleSetAuthorizedStatusEvent(status) {
-  return ({
-    type: constants.APPLICATION__SET__AUTHORIZED__STATUS,
-    data: status
-  });
-}
+const setAuthorizedStatus = status => ({
+  type: constants.APPLICATION__SET_AUTHORIZED_STATUS,
+  data: status
+});
 
-export const handleSetAuthorizedStatus = handleSetAuthorizedStatusEvent;
+const setUserData = data => ({
+  type: constants.APPLICATION__LOGIN_USER,
+  data
+});
+
+const handleRegisterEvent = (userData) => {
+  return (dispatch) => {
+    const data = {
+      uid: 'userUid',
+      name: 'User Useriano',
+      token: 'temporaryUserLoginToken'
+    };
+
+    dispatch(setUserData(data));
+    dispatch(setAuthorizedStatus(true));
+  };
+};
+
+const handleLoginEvent = (userData) => {
+  return (dispatch) => {
+    const data = {
+      uid: 'userUid',
+      name: 'User Useriano',
+      token: 'temporaryUserLoginToken'
+    };
+
+    dispatch(setUserData(data));
+    dispatch(setAuthorizedStatus(true));
+  };
+};
+
+const handleLogoutEvent = () => ({
+  type: constants.APPLICATION__LOGOUT_USER
+});
+
+export const handleRegister = handleRegisterEvent;
+export const handleLogin = handleLoginEvent;
+export const handleLogout = handleLogoutEvent;

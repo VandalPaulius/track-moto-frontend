@@ -1,0 +1,21 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.landing {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  .header {
+    height: 40%;
+    min-height: 200px;
+  }
+
+  .description {
+    height: 60%;
+  }
+}

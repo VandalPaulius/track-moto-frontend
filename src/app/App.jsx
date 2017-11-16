@@ -4,34 +4,51 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as appActions from './App.actions';
 import { Styles } from './assets'; // eslint-disable-line
+import { Landing } from './components';
 
 class App extends Component {
   render() {
-    if (this.props.authorized) {
+    if (this.props.user.authorized) {
       return (
         <div>
           Map
+          <button onClick={() => this.props.actions.handleLogout()}>
+            Log out
+          </button>
         </div>
       );
     }
     return (
-      <div className="App">
-        Landing
+      <div>
+        <Landing
+          user={this.props.user}
+          handleRegister={this.props.actions.handleRegister}
+          handleLogin={this.props.actions.handleLogin}
+        />
       </div>
     );
   }
 }
 
 App.propTypes = {
-  authorized: PropTypes.bool
+  actions: PropTypes.shape({
+    handleRegister: PropTypes.func.isRequired,
+    handleLogin: PropTypes.func.isRequired,
+    handleLogout: PropTypes.func.isRequired
+  }).isRequired,
+  user: PropTypes.shape({
+    authorized: PropTypes.bool
+  })
 };
 
 App.defaultProps = {
-  authorized: false
+  user: {
+    authorized: false
+  }
 };
 
 const mapStateToProps = state => ({
-  authorized: state.app.authorized,
+  user: state.app.user
 });
 
 const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(appActions, dispatch) });
