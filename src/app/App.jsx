@@ -8,7 +8,7 @@ import { Landing } from './components';
 
 class App extends Component {
   render() {
-    if (this.props.authorized) {
+    if (this.props.user.authorized) {
       return (
         <div>
           Map
@@ -17,22 +17,36 @@ class App extends Component {
     }
     return (
       <div>
-        <Landing />
+        <Landing
+          user={this.props.user}
+          handleSetAuthorizedStatus={this.props.actions.handleSetAuthorizedStatus}
+          handleRegister={this.props.actions.handleRegister}
+          handleLogin={this.props.actions.handleLogin}
+        />
       </div>
     );
   }
 }
 
 App.propTypes = {
-  authorized: PropTypes.bool
+  actions: PropTypes.shape({
+    handleSetAuthorizedStatus: PropTypes.func.isRequired,
+    handleRegister: PropTypes.func.isRequired,
+    handleLogin: PropTypes.func.isRequired
+  }).isRequired,
+  user: PropTypes.shape({
+    authorized: PropTypes.bool
+  })
 };
 
 App.defaultProps = {
-  authorized: false
+  user: {
+    authorized: false
+  }
 };
 
 const mapStateToProps = state => ({
-  authorized: state.app.authorized,
+  user: state.app.user
 });
 
 const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(appActions, dispatch) });

@@ -9,10 +9,33 @@ export default combineReducers({
 
 function appReducer(state = {}, action) {
   switch (action.type) {
-    case constants.APPLICATION__SET__AUTHORIZED__STATUS: {
+    case constants.APPLICATION__SET_AUTHORIZED_STATUS: {
+      if (action.data) {
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            authorized: action.data
+          }
+        };
+      }
+
       return {
         ...state,
-        authorized: action.data
+        user: {
+          authorized: action.data
+        }
+      };
+    }
+    case constants.APPLICATION__LOGIN_USER: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          uid: action.data.uid,
+          name: action.data.name,
+          token: action.data.token
+        }
       };
     }
     default: {

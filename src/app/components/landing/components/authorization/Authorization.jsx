@@ -11,7 +11,29 @@ class Authorization extends React.Component {
     }
   }
 
-  drawerLeft = () => {
+  drawerLeft = ({ isOpen }) => {
+    const loginForm = () => (
+      <div>
+        <div className="item">
+          <span className="label">email</span>
+          <input className="value" />
+        </div>
+        <div className="item">
+          <span className="label">password</span>
+          <input className="value" />
+        </div>
+      </div>
+    );
+
+    const loginButton = ({ className }) => (
+      <button
+        className={className}
+        onClick={() => this.props.handleLogin({})}
+      >
+        Login
+      </button>
+    );
+
     return (
       <div
         onMouseEnter={() => this.setState((state) => ({
@@ -22,14 +44,45 @@ class Authorization extends React.Component {
           ...state,
           drawerOpen: ''
         }))}
-        className={`drawer ${this.state.drawerOpen === 'left' && 'open'}`}
+        className={`drawer ${isOpen && 'open'}`}
       >
-        drawerLeft
+        <div className="auth-form">
+          {isOpen && loginForm()}
+            <div className="button-panel">
+              {loginButton({ className: 'button light' })}
+            </div>
+        </div>
       </div>
     )
   }
 
-  drawerRight = () => {
+  drawerRight = ({ isOpen }) => {
+    const registerForm = () => (
+      <div>
+        <div className="item">
+          <span className="label">email</span>
+          <input className="value" />
+        </div>
+        <div className="item">
+          <span className="label">password</span>
+          <input className="value" />
+        </div>
+        <div className="item">
+          <span className="label">password repeat</span>
+          <input className="value" />
+        </div>
+      </div>
+    );
+
+    const registerButton = ({ className }) => (
+      <button
+        className={className}
+        onClick={() => this.props.handleRegister({})}
+      >
+        Register
+      </button>
+    );
+
     return (
       <div
         onMouseEnter={() => this.setState((state) => ({
@@ -40,9 +93,14 @@ class Authorization extends React.Component {
           ...state,
           drawerOpen: ''
         }))}
-        className={`drawer ${this.state.drawerOpen === 'right' && 'open'}`}
+        className={`drawer ${isOpen && 'open'}`}
       >
-        drawerRight
+        <div className="auth-form">
+          {isOpen && registerForm()}
+          <div  className="button-panel">
+            {registerButton({ className: 'button light' })}
+          </div>
+        </div>
       </div>
     )
   }
@@ -51,15 +109,18 @@ class Authorization extends React.Component {
     console.log('this.state', this);
     return (
       <div className="authorization">
-        {this.drawerLeft()}
-        {this.drawerRight()}
+        {this.drawerLeft({ isOpen: this.state.drawerOpen  === 'left' })}
+        {this.drawerRight({ isOpen: this.state.drawerOpen  === 'right' })}
       </div>
     );
   }
 }
 
 Authorization.propTypes = {
-
+  user: PropTypes.shape({}),
+  handleSetAuthorizedStatus: PropTypes.func.isRequired,
+  handleRegister: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired
 };
 
 Authorization.defaultProps = {
