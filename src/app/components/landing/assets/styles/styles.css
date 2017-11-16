@@ -13,4 +13,8 @@
     height: 40%;
     min-height: 200px; }
   .landing .description {
-    height: 60%; }
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px; }
