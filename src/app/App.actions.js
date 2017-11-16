@@ -1,6 +1,6 @@
 import * as constants from './App.constants';
 
-const handleSetAuthorizedStatusEvent = status => ({
+const setAuthorizedStatus = status => ({
   type: constants.APPLICATION__SET_AUTHORIZED_STATUS,
   data: status
 });
@@ -19,6 +19,7 @@ const handleRegisterEvent = (userData) => {
     };
 
     dispatch(setUserData(data));
+    dispatch(setAuthorizedStatus(true));
   };
 };
 
@@ -31,9 +32,14 @@ const handleLoginEvent = (userData) => {
     };
 
     dispatch(setUserData(data));
+    dispatch(setAuthorizedStatus(true));
   };
 };
 
-export const handleSetAuthorizedStatus = handleSetAuthorizedStatusEvent;
+const handleLogoutEvent = () => ({
+  type: constants.APPLICATION__LOGOUT_USER
+});
+
 export const handleRegister = handleRegisterEvent;
 export const handleLogin = handleLoginEvent;
+export const handleLogout = handleLogoutEvent;

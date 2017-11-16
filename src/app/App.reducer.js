@@ -10,19 +10,10 @@ export default combineReducers({
 function appReducer(state = {}, action) {
   switch (action.type) {
     case constants.APPLICATION__SET_AUTHORIZED_STATUS: {
-      if (action.data) {
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            authorized: action.data
-          }
-        };
-      }
-
       return {
         ...state,
         user: {
+          ...state.user,
           authorized: action.data
         }
       };
@@ -36,6 +27,12 @@ function appReducer(state = {}, action) {
           name: action.data.name,
           token: action.data.token
         }
+      };
+    }
+    case constants.APPLICATION__LOGOUT_USER: {
+      return {
+        ...state,
+        user: {}
       };
     }
     default: {

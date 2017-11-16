@@ -30,7 +30,7 @@ class Authorization extends React.Component {
         className={className}
         onClick={() => this.props.handleLogin({})}
       >
-        Login
+        Log in
       </button>
     );
 
@@ -118,7 +118,6 @@ class Authorization extends React.Component {
 
 Authorization.propTypes = {
   user: PropTypes.shape({}),
-  handleSetAuthorizedStatus: PropTypes.func.isRequired,
   handleRegister: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired
 };

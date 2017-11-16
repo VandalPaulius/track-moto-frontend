@@ -12,6 +12,9 @@ class App extends Component {
       return (
         <div>
           Map
+          <button onClick={() => this.props.actions.handleLogout()}>
+            Log out
+          </button>
         </div>
       );
     }
@@ -19,7 +22,6 @@ class App extends Component {
       <div>
         <Landing
           user={this.props.user}
-          handleSetAuthorizedStatus={this.props.actions.handleSetAuthorizedStatus}
           handleRegister={this.props.actions.handleRegister}
           handleLogin={this.props.actions.handleLogin}
         />
@@ -30,9 +32,9 @@ class App extends Component {
 
 App.propTypes = {
   actions: PropTypes.shape({
-    handleSetAuthorizedStatus: PropTypes.func.isRequired,
     handleRegister: PropTypes.func.isRequired,
-    handleLogin: PropTypes.func.isRequired
+    handleLogin: PropTypes.func.isRequired,
+    handleLogout: PropTypes.func.isRequired
   }).isRequired,
   user: PropTypes.shape({
     authorized: PropTypes.bool

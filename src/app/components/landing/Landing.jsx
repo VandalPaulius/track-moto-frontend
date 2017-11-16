@@ -10,7 +10,6 @@ class Landing extends React.Component {
         <div className="header">
           <Authorization
             user={this.props.user}
-            handleSetAuthorizedStatus={this.props.handleSetAuthorizedStatus}
             handleRegister={this.props.handleRegister}
             handleLogin={this.props.handleLogin}
           />
@@ -25,9 +24,8 @@ class Landing extends React.Component {
 
 Landing.propTypes = {
   user: PropTypes.shape({}),
-  handleSetAuthorizedStatus: PropTypes.func.isRequired,
   handleRegister: PropTypes.func.isRequired,
-  handleLogin: PropTypes.func.isRequired
+  handleLogin: PropTypes.func.isRequired,
 };
 
 Landing.defaultProps = {
