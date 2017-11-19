@@ -15,7 +15,7 @@ class Landing extends React.Component {
           />
         </div>
         <div className="description">
-          Service description
+          Track Moto is a free motorcycle tracking service. Just build a tracker by our instructions and you are good to go! (Tracker needs a SIM card with internet access)
         </div>
       </div>
     );
