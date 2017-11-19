@@ -106,7 +106,6 @@ class Authorization extends React.Component {
   }
 
   render() {
-    console.log('this.state', this);
     return (
       <div className="authorization">
         {this.drawerLeft({ isOpen: this.state.drawerOpen  === 'left' })}
