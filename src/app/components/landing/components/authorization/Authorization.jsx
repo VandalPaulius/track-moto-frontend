@@ -97,7 +97,7 @@ class Authorization extends React.Component {
       >
         <div className="auth-form">
           {isOpen && registerForm()}
-          <div  className="button-panel">
+          <div className="button-panel">
             {registerButton({ className: 'button light' })}
           </div>
         </div>

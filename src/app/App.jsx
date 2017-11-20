@@ -42,7 +42,7 @@ App.propTypes = {
 
 App.defaultProps = {
   user: {
-    authorized: false
+    authorized: true //false //dev
   }
 };
 
