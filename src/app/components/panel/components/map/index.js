@@ -1,1 +1,1 @@
-export { default as Authorization } from './Authorization';
+export { default as Map } from './Map';

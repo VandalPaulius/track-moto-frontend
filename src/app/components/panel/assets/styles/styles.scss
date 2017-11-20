@@ -9,8 +9,10 @@ $shadow-gray: rgb(90, 90, 90);
   box-sizing: border-box;
 }
 
-.panels {
+.panel {
   position: absolute;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-wrap: nowrap;
 }

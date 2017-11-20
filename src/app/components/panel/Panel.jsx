@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import { Styles } from './assets'; // eslint-disable-line
+import { Styles } from './assets'; // eslint-disable-line
+import { Sidebar, Map } from './components';
 
 class Panel extends React.Component {
   render() {
     return (
-      <div className="panels">
-        {/* Map
-        <button onClick={() => this.props.actions.handleLogout()}>
-          Log out
-        </button> */}
-
+      <div className="panel">
+        <Sidebar
+          handleLogout={this.props.handleLogout}
+        />
+        <Map />
       </div>
     );
   }
