@@ -4,17 +4,16 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as appActions from './App.actions';
 import { Styles } from './assets'; // eslint-disable-line
-import { Landing } from './components';
+import { Landing, Panel } from './components';
 
 class App extends Component {
   render() {
     if (this.props.user.authorized) {
       return (
         <div>
-          Map
-          <button onClick={() => this.props.actions.handleLogout()}>
-            Log out
-          </button>
+          <Panel
+            handleLogout={this.props.actions.handleLogout}
+          />
         </div>
       );
     }
