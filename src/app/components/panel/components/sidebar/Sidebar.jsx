@@ -11,12 +11,14 @@ class Sidebar extends React.Component {
     return (
       <div className="sidebar">
         Sidebar
-        <button
-          className="button light"
-          onClick={() => this.props.handleLogout()}
-        >
-          Log out
-        </button>
+        <div className="bottom-panel">
+          <button
+            className="button light"
+            onClick={() => this.props.handleLogout()}
+          >
+            Log out
+          </button>
+        </div>
       </div>
     );
   }

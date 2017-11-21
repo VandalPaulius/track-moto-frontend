@@ -11,6 +11,16 @@ $shadow-gray: rgb(90, 90, 90);
 
 .sidebar {
   background-color: $darkgrey;
+  width: 280px;
+  position: relative;
+
+  .bottom-panel {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 
   .button {
     border: none;
