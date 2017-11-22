@@ -28,10 +28,8 @@
   "scripts": {
     "build-css2": "node-sass src/ -o src/",
     "watch-css2": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
-
     "build-css": "node-sass --include-path scss src/ -o src/",
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
-
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",

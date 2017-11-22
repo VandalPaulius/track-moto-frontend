@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import * as constants from './App.constants';
+import { panelReducer } from './components';
 
 export default combineReducers({
   app: appReducer,
-  form: formReducer
+  form: formReducer,
+  panel: panelReducer
 });
 
 function appReducer(state = {}, action) {

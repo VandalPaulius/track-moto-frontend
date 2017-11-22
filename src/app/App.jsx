@@ -4,17 +4,22 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as appActions from './App.actions';
 import { Styles } from './assets'; // eslint-disable-line
-import { Landing } from './components';
+import { Landing, Panel } from './components';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.actions.handleLogin(); // dev
+  }
+
   render() {
     if (this.props.user.authorized) {
       return (
         <div>
-          Map
-          <button onClick={() => this.props.actions.handleLogout()}>
-            Log out
-          </button>
+          <Panel
+            handleLogout={this.props.actions.handleLogout}
+            {...this.props.panel}
+            user={this.props.user}
+          />
         </div>
       );
     }
@@ -38,17 +43,20 @@ App.propTypes = {
   }).isRequired,
   user: PropTypes.shape({
     authorized: PropTypes.bool
-  })
+  }),
+  panel: PropTypes.shape({})
 };
 
 App.defaultProps = {
   user: {
     authorized: false
-  }
+  },
+  panel: {}
 };
 
 const mapStateToProps = state => ({
-  user: state.app.user
+  user: state.app.user,
+  panel: state.panel
 });
 
 const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(appActions, dispatch) });
