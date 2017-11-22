@@ -1,2 +1,2 @@
 export { Landing } from './landing';
-export { Panel } from './panel';
+export { Panel, panelReducer } from './panel';

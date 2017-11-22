@@ -23,4 +23,10 @@ const handleLoadTrackersEvent = (userData) => {
   };
 };
 
+const handleSetActiveTrackerEvent = uid => ({
+  type: constants.APPLICATION__PANEL__SET_ACTIVE_TRACKER,
+  data: uid
+});
+
 export const handleLoadTrackers = handleLoadTrackersEvent;
+export const handleSetActiveTracker = handleSetActiveTrackerEvent;

@@ -8,12 +8,15 @@ import { Sidebar, Map } from './components';
 
 class Panel extends React.Component {
   render() {
+    console.log('Panel this.props', this.props);
     return (
       <div className="panel">
         <Sidebar
           handleLogout={this.props.handleLogout}
           user={this.props.user}
           handleLoadTrackers={this.props.actions.handleLoadTrackers}
+          trackers={this.props.trackers}
+          handleSetActiveTracker={this.props.actions.handleSetActiveTracker}
         />
         <Map />
       </div>
@@ -25,12 +28,15 @@ Panel.propTypes = {
   user: PropTypes.shape({}),
   handleLogout: PropTypes.func.isRequired,
   actions: PropTypes.shape({
-    handleLoadTrackers: PropTypes.func.isRequired
-  }).isRequired
+    handleLoadTrackers: PropTypes.func.isRequired,
+    handleSetActiveTracker: PropTypes.func.isRequired
+  }).isRequired,
+  trackers: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 Panel.defaultProps = {
-  user: {}
+  user: {},
+  trackers: []
 };
 
 const mapDispatchToProps = dispatch => ({
