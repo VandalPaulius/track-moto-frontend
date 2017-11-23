@@ -8,16 +8,24 @@ class Sidebar extends React.Component {
   }
 
   trackers() {
-    return this.props.trackers.map((tracker, index) => (
-      <div
-        key={tracker.uid}
-        onClick={() => this.props.handleSetActiveTracker(tracker.uid)}
-      >
-        {console.log('tracker', tracker)}
-        {tracker.name}
-        {tracker.active && 'active'}
+    return (
+      <div className="trackers-container">
+        {this.props.trackers.map((tracker, index) => (
+          <div
+            key={tracker.uid}
+            onClick={() => this.props.handleSetActiveTracker(tracker.uid)}
+            className={`tracker ${tracker.active && 'active'}`}
+          >
+            <div className="name">
+              {tracker.name}
+            </div>
+            <div className="status">
+              {tracker.status}
+            </div>
+          </div>
+        ))}
       </div>
-    ));
+    );
   }
 
   render() {
