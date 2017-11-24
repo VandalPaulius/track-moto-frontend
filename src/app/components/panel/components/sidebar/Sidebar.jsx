@@ -58,7 +58,7 @@ Sidebar.propTypes = {
 
 Sidebar.defaultProps = {
   trackers: [],
-  users: {}
+  user: {}
 };
 
 export default Sidebar;
