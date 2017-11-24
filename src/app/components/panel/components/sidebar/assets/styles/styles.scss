@@ -15,6 +15,7 @@ $unimportant-gray: rgb(95, 95, 95);
   background-color: $darkgrey;
   width: 280px;
   position: relative;
+  box-shadow: 0px 1px 2px $shadow-gray;
 
   .bottom-panel {
     position: absolute;
@@ -68,6 +69,11 @@ $unimportant-gray: rgb(95, 95, 95);
 
     &.dark {
       background-color: $darkgrey;
+    }
+
+    &.flush {
+      box-shadow: none;
+    background-color: inherit;
     }
 
     &:hover {

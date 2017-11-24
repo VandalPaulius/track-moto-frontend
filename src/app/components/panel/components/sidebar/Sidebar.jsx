@@ -3,8 +3,62 @@ import PropTypes from 'prop-types';
 import { Styles } from './assets'; // eslint-disable-line
 
 class Sidebar extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      userMenuExpanded: false
+    };
+  }
+
   componentWillMount() {
     this.props.handleLoadTrackers();
+  }
+
+  insideActions() {
+    const toggleUserMenuEvent = (isOpen) => {
+      console.log('closeUserMenu');
+      this.setState(state => ({
+        ...state,
+        userMenuExpanded: isOpen
+      }));
+    };
+
+    return {
+      toggleUserMenu: toggleUserMenuEvent
+    }
+  }
+
+  userMenu() {
+    const menuItem = content => (
+      <div>
+        {content}
+      </div>
+    );
+
+    const userName = (onClick = () => {}) => (
+      <button
+        className="button flush"
+        onClick={onClick}
+      >
+        {this.props.user.name}
+      </button>
+    );
+
+    return (
+      <div>
+        {this.state.userMenuExpanded ?
+          (
+            <div>
+              {/* {userName(() => console.log('closeContextMenu'))} */}
+              {userName(() => this.insideActions.toggleUserMenu(false))}
+              {/* menu items */}
+            </div>
+          ) :
+          userName(() => this.insideActions.toggleUserMenu(true))
+        }
+      </div>
+    );
   }
 
   trackers() {
@@ -32,7 +86,7 @@ class Sidebar extends React.Component {
     console.log('Sidebar this.props', this.props);
     return (
       <div className="sidebar">
-        {this.props.user.name}
+        {this.userMenu()}
         {this.trackers()}
         <div className="bottom-panel">
           <button
