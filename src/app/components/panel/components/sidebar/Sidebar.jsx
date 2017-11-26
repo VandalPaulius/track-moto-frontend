@@ -32,26 +32,44 @@ class Sidebar extends React.Component {
     );
 
     const userName = (onClick = () => {}) => (
-      <button
-        className="button flush"
+      <div
+        className="item user-name"
         onClick={onClick}
       >
         {this.props.user.name}
-      </button>
+      </div>
     );
 
-    console.log('this', this);
-
-
     return (
-      <div>
+      <div className={`user-name-menu ${this.state.userMenuExpanded && 'open'}`}>
         {this.state.userMenuExpanded ?
           (
             <div onMouseLeave={() => this.actions.toggleUserMenu(false)}>
-              {/* {userName(() => console.log('closeContextMenu'))} */}
-              {userName()}
-              {/* menu items */}
-              sdgfdg
+              {userName(() => this.actions.toggleUserMenu(false))}
+              {menuItem(
+                <div
+                  className="item"
+                  onClick={() => console.log('open trackers modal')}
+                >
+                  trackers
+                </div>
+              )}
+              {menuItem(
+                <div
+                  className="item"
+                  onClick={() => console.log('open settings modal')}
+                >
+                  settings
+                </div>
+              )}
+              {menuItem(
+                <div
+                  className="item"
+                  onClick={() => this.props.handleLogout()}
+                >
+                  log out
+                </div>
+              )}
             </div>
           ) :
           userName(() => this.actions.toggleUserMenu(true))
@@ -87,14 +105,6 @@ class Sidebar extends React.Component {
       <div className="sidebar">
         {this.userMenu()}
         {this.trackers()}
-        <div className="bottom-panel">
-          <button
-            className="button light"
-            onClick={() => this.props.handleLogout()}
-          >
-            Log out
-          </button>
-        </div>
       </div>
     );
   }
