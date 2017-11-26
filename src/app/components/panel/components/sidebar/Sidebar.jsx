@@ -9,24 +9,19 @@ class Sidebar extends React.Component {
     this.state = {
       userMenuExpanded: false
     };
+
+    this.actions = {
+      toggleUserMenu: (isOpen) => {
+        this.setState(state => ({
+          ...state,
+          userMenuExpanded: isOpen
+        }));
+      }
+    };
   }
 
   componentWillMount() {
     this.props.handleLoadTrackers();
-  }
-
-  insideActions() {
-    const toggleUserMenuEvent = (isOpen) => {
-      console.log('closeUserMenu');
-      this.setState(state => ({
-        ...state,
-        userMenuExpanded: isOpen
-      }));
-    };
-
-    return {
-      toggleUserMenu: toggleUserMenuEvent
-    }
   }
 
   userMenu() {
@@ -45,17 +40,21 @@ class Sidebar extends React.Component {
       </button>
     );
 
+    console.log('this', this);
+
+
     return (
       <div>
         {this.state.userMenuExpanded ?
           (
-            <div>
+            <div onMouseLeave={() => this.actions.toggleUserMenu(false)}>
               {/* {userName(() => console.log('closeContextMenu'))} */}
-              {userName(() => this.insideActions.toggleUserMenu(false))}
+              {userName()}
               {/* menu items */}
+              sdgfdg
             </div>
           ) :
-          userName(() => this.insideActions.toggleUserMenu(true))
+          userName(() => this.actions.toggleUserMenu(true))
         }
       </div>
     );
