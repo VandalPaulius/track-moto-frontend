@@ -100,11 +100,18 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    console.log('Sidebar this.props', this.props);
     return (
       <div className="sidebar">
         {this.userMenu()}
         {this.trackers()}
+        <div className="bottom-panel">
+          <a
+            className="website-name"
+            href="http://track-moto.com"
+          >
+            track-moto.com
+          </a>
+        </div>
       </div>
     );
   }
