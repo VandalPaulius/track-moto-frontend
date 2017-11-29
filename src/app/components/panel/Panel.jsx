@@ -18,7 +18,9 @@ class Panel extends React.Component {
           trackers={this.props.trackers}
           handleSetActiveTracker={this.props.actions.handleSetActiveTracker}
         />
-        <Map />
+        <Map
+          trackers={this.props.trackers}
+        />
       </div>
     );
   }

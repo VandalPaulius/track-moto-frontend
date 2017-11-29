@@ -1,6 +1,6 @@
 import * as constants from './Panel.constants';
 
-function appReducer(state = {}, action) {
+function panelReducer(state = {}, action) {
   switch (action.type) {
     case constants.APPLICATION__PANEL__LOAD_TRACKERS: {
       return {
@@ -23,4 +23,4 @@ function appReducer(state = {}, action) {
   }
 }
 
-export default appReducer;
+export default panelReducer;
