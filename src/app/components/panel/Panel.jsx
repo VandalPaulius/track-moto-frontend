@@ -20,6 +20,7 @@ class Panel extends React.Component {
         />
         <Map
           trackers={this.props.trackers}
+          user={this.props.user}
         />
       </div>
     );
@@ -33,7 +34,7 @@ Panel.propTypes = {
     handleLoadTrackers: PropTypes.func.isRequired,
     handleSetActiveTracker: PropTypes.func.isRequired
   }).isRequired,
-  trackers: PropTypes.arrayOf(PropTypes.shape()),
+  trackers: PropTypes.arrayOf(PropTypes.shape())
 };
 
 Panel.defaultProps = {

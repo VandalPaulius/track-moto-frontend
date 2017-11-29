@@ -1,6 +1,6 @@
 import * as constants from './Map.constants';
 
-const handleLoadTrackersEvent = (userData) => {
+const handleLoadTrackerCoordEvent = (trackerUid, userData) => {
   return (dispatch) => {
     const data = {
       trackerUid: 'trackerUid1',
@@ -65,3 +65,5 @@ const handleLoadTrackersEvent = (userData) => {
     });
   };
 };
+
+export const handleLoadTrackerCoord = handleLoadTrackerCoordEvent;

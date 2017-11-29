@@ -1,2 +1,2 @@
-export { Map } from './map';
+export { Map, mapReducer } from './map';
 export { Sidebar } from './sidebar';
