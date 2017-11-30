@@ -11,4 +11,10 @@ $shadow-gray: rgb(90, 90, 90);
 
 .map {
   width: 100%;
+  display: block;
+
+  .leaflet-container {
+    height: 100%;
+    width: 100%;
+  }
 }
