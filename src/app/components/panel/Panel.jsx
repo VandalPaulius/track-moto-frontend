@@ -8,7 +8,6 @@ import { Sidebar, Map } from './components';
 
 class Panel extends React.Component {
   render() {
-    console.log('Panel this.props', this.props);
     return (
       <div className="panel">
         <Sidebar
@@ -19,7 +18,8 @@ class Panel extends React.Component {
           handleSetActiveTracker={this.props.actions.handleSetActiveTracker}
         />
         <Map
-          trackers={this.props.trackers}
+          tracker={this.props.trackers.find(tracker =>
+            tracker.active && tracker)}
           user={this.props.user}
         />
       </div>

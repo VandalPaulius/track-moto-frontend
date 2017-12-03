@@ -2,6 +2,7 @@ $darkgrey: rgb(59, 59, 59);
 $activegreen: rgb(87, 180, 25);
 $white: white;
 $shadow-gray: rgb(90, 90, 90);
+$error-red: #D63A3A;
 
 * {
   -webkit-box-sizing: border-box;
@@ -11,10 +12,31 @@ $shadow-gray: rgb(90, 90, 90);
 
 .map {
   width: 100%;
-  display: block;
+  position: relative;
 
   .leaflet-container {
     height: 100%;
     width: 100%;
+  }
+
+  .message-container {
+    position: absolute;
+    z-index: 1000; // leaflet map is at 999
+    top: 0;
+    left: 0;
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+
+    .message {
+      pointer-events: auto;
+      padding: 10px;
+
+      &.error {
+        background-color: $error-red;
+      }
+    }
   }
 }
