@@ -16,6 +16,10 @@ import * as mapActions from './Map.actions';
 
 class Map extends React.Component {
   componentDidMount() {
+    this.loadDataIfTrackerPresent();
+  }
+
+  loadDataIfTrackerPresent() {
     if (this.props.tracker) {
       this.props.actions.handleLoadTrackerCoord(
         this.props.tracker.uid,
@@ -106,8 +110,34 @@ class Map extends React.Component {
       </div>
     );
 
+    const mapControls = () => {
+      return (
+        <div className="map-controls-container">
+          <div className="item" >
+            <button
+              onClick={() => this.loadDataIfTrackerPresent()}
+              className="button light"
+            >
+              Update data
+            </button>
+          </div>
+        </div>
+      );
+    };
+
     return (
       <div className="map">
+        {/* <div className="map-controls-container">
+          {mapControls()}
+        </div> */}
+        <div className="interaction-panel">
+          {mapControls()}
+          <div className="message-container">
+            {areAnyActive() ?
+              !trackerHasData() && noDataError() :
+              noTrackerActive()}
+          </div>
+        </div>
         <LeafLetMap center={mapCenter()} zoom={mapZoom(mapCenter())}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -115,11 +145,11 @@ class Map extends React.Component {
           />
           {trackerHasData() && this.rendertrackerData()}}
         </LeafLetMap>
-        <div className="message-container">
+        {/* <div className="message-container">
           {areAnyActive() ?
             !trackerHasData() && noDataError() :
             noTrackerActive()}
-        </div>
+        </div> */}
       </div>
     );
   }

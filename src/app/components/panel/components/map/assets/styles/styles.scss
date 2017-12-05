@@ -18,25 +18,56 @@ $error-red: #D63A3A;
     height: 100%;
     width: 100%;
   }
-
-  .message-container {
+  
+  .interaction-panel {
     position: absolute;
     z-index: 1000; // leaflet map is at 999
     top: 0;
     left: 0;
-    padding: 5px;
     width: 100%;
-    display: flex;
-    justify-content: center;
     pointer-events: none;
 
-    .message {
-      pointer-events: auto;
-      padding: 10px;
+    .map-controls-container {
+      margin: 10px;
 
-      &.error {
-        background-color: $error-red;
+      &>.item {
+        pointer-events: auto;
       }
+    }
+
+    .message-container {
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+
+      .message {
+        pointer-events: auto;
+        padding: 10px;
+
+        &.error {
+          background-color: $error-red;
+        }
+      }
+    }
+  }
+
+  .button {
+    border: none;
+    padding: 5px 7px 5px 7px;
+    box-shadow: 0px 1px 2px $shadow-gray;
+    background-color: $white;
+
+    &.bright {
+      background-color: $white;
+    }
+
+    &.dark {
+      background-color: $darkgrey;
+    }
+
+    &:hover {
+      background-color: $activegreen;
+      box-shadow: 0px 1px 5px $shadow-gray;
     }
   }
 }
