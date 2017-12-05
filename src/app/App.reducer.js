@@ -1,13 +1,5 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
 import * as constants from './App.constants';
-import { panelReducer } from './components';
-
-export default combineReducers({
-  app: appReducer,
-  form: formReducer,
-  panel: panelReducer
-});
 
 function appReducer(state = {}, action) {
   switch (action.type) {
@@ -42,3 +34,5 @@ function appReducer(state = {}, action) {
     }
   }
 }
+
+export default appReducer;

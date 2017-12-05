@@ -4,4 +4,23 @@
   box-sizing: border-box; }
 
 .map {
-  width: 100%; }
+  width: 100%;
+  position: relative; }
+  .map .leaflet-container {
+    height: 100%;
+    width: 100%; }
+  .map .message-container {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    pointer-events: none; }
+    .map .message-container .message {
+      pointer-events: auto;
+      padding: 10px; }
+      .map .message-container .message.error {
+        background-color: #D63A3A; }

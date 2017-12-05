@@ -8,8 +8,8 @@ $unimportant-gray: rgb(95, 95, 95);
 
 * {
   -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .sidebar {
@@ -24,6 +24,14 @@ $unimportant-gray: rgb(95, 95, 95);
     width: 100%;
     display: flex;
     justify-content: center;
+    & >.website-name {
+      color: $inactive-gray;
+      text-decoration: none;
+
+      &:hover {
+        color: $white;
+      }
+    }
   }
 
   .trackers-container {

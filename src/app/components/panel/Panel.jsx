@@ -8,7 +8,6 @@ import { Sidebar, Map } from './components';
 
 class Panel extends React.Component {
   render() {
-    console.log('Panel this.props', this.props);
     return (
       <div className="panel">
         <Sidebar
@@ -18,7 +17,11 @@ class Panel extends React.Component {
           trackers={this.props.trackers}
           handleSetActiveTracker={this.props.actions.handleSetActiveTracker}
         />
-        <Map />
+        <Map
+          tracker={this.props.trackers.find(tracker =>
+            tracker.active && tracker)}
+          user={this.props.user}
+        />
       </div>
     );
   }
@@ -31,7 +34,7 @@ Panel.propTypes = {
     handleLoadTrackers: PropTypes.func.isRequired,
     handleSetActiveTracker: PropTypes.func.isRequired
   }).isRequired,
-  trackers: PropTypes.arrayOf(PropTypes.shape()),
+  trackers: PropTypes.arrayOf(PropTypes.shape())
 };
 
 Panel.defaultProps = {

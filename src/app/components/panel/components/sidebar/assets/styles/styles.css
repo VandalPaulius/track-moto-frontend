@@ -14,9 +14,14 @@
     width: 100%;
     display: flex;
     justify-content: center; }
+    .sidebar .bottom-panel > .website-name {
+      color: #a8a8a8;
+      text-decoration: none; }
+      .sidebar .bottom-panel > .website-name:hover {
+        color: white; }
   .sidebar .trackers-container {
     position: relative;
-    top: 80px; }
+    top: 100px; }
     .sidebar .trackers-container .tracker {
       margin-top: 5px;
       margin-bottom: 5px;
@@ -43,9 +48,28 @@
       background-color: white; }
     .sidebar .button.dark {
       background-color: #3b3b3b; }
-    .sidebar .button.flush {
-      box-shadow: none;
-      background-color: inherit; }
     .sidebar .button:hover {
       background-color: #57b419;
       box-shadow: 0px 1px 5px #5a5a5a; }
+  .sidebar .user-name-menu {
+    width: 100%;
+    color: white;
+    z-index: 2;
+    position: absolute; }
+    .sidebar .user-name-menu.open {
+      background-color: white;
+      box-shadow: 0px 1px 2px #5a5a5a;
+      color: black; }
+    .sidebar .user-name-menu .item {
+      border: none;
+      width: 100%;
+      background-color: inherit;
+      color: inherit;
+      padding: 5px 7px 5px 7px; }
+      .sidebar .user-name-menu .item.user-name {
+        display: flex;
+        justify-content: center; }
+      .sidebar .user-name-menu .item:hover {
+        background-color: #57b419;
+        box-shadow: 0px 1px 5px #5a5a5a;
+        color: black; }
