@@ -53,6 +53,8 @@ class Map extends React.Component {
       <div>
         <Polyline
           positions={coords}
+          color="blue"
+          weight={6}
         />
         <CircleMarker center={lastPosition} color="red" radius={20}>
           <Popup>
@@ -90,7 +92,7 @@ class Map extends React.Component {
     };
 
     const mapZoom = (mapCenter) => mapCenter[0] === 0 && mapCenter[1] === 0 ? // eslint-disable-line
-      2 : 13; // eslint-disable-line
+      2 : 14; // eslint-disable-line
 
     const noDataError = () => (
       <div className="message error">
