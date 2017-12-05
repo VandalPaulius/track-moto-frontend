@@ -8,35 +8,11 @@ import {
   Polyline,
   CircleMarker,
   Popup,
-  Tooltip,
-  Marker
+  Tooltip
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Styles } from './assets'; // eslint-disable-line
 import * as mapActions from './Map.actions';
-import { ControlPanel } from './components'
-
-// class CustomMarker {
-
-//     zoomIn(){
-//       this.context.map.zoomIn()
-//     }
-//     zoomOut(){
-//       this.context.map.zoomOut()
-//     }
-
-//     render() {
-//       return (
-//         <Marker position="top-left">
-//           <Popup>
-//             <button onCLick={this.zoomIn}>Zoom In</button>
-//             <button onCLick={this.zoomOut}>Zoom In</button>
-//           </Popup>
-//         </Marker>
-//       )
-//     }
-//   }
-  //export CustomMarker;
 
 class Map extends React.Component {
   componentDidMount() {
@@ -151,9 +127,6 @@ class Map extends React.Component {
 
     return (
       <div className="map">
-        {/* <div className="map-controls-container">
-          {mapControls()}
-        </div> */}
         <div className="interaction-panel">
           {mapControls()}
           <div className="message-container">
@@ -171,14 +144,7 @@ class Map extends React.Component {
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
           />
           {trackerHasData() && this.rendertrackerData()}}
-          {/* <CustomMarker /> */}
-          {/* <ControlPanel /> */}
         </LeafLetMap>
-        {/* <div className="message-container">
-          {areAnyActive() ?
-            !trackerHasData() && noDataError() :
-            noTrackerActive()}
-        </div> */}
       </div>
     );
   }

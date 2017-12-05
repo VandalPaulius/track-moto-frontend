@@ -17,7 +17,7 @@
     width: 100%;
     pointer-events: none; }
     .map .interaction-panel .map-controls-container {
-      margin: 10px; }
+      margin: 10px 10px 10px 55px; }
       .map .interaction-panel .map-controls-container > .item {
         pointer-events: auto; }
     .map .interaction-panel .message-container {
