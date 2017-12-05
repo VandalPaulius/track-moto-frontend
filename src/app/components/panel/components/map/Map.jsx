@@ -127,9 +127,6 @@ class Map extends React.Component {
 
     return (
       <div className="map">
-        {/* <div className="map-controls-container">
-          {mapControls()}
-        </div> */}
         <div className="interaction-panel">
           {mapControls()}
           <div className="message-container">
@@ -138,18 +135,16 @@ class Map extends React.Component {
               noTrackerActive()}
           </div>
         </div>
-        <LeafLetMap center={mapCenter()} zoom={mapZoom(mapCenter())}>
+        <LeafLetMap
+          center={mapCenter()}
+          zoom={mapZoom(mapCenter())}
+        >
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
           />
           {trackerHasData() && this.rendertrackerData()}}
         </LeafLetMap>
-        {/* <div className="message-container">
-          {areAnyActive() ?
-            !trackerHasData() && noDataError() :
-            noTrackerActive()}
-        </div> */}
       </div>
     );
   }

@@ -18,7 +18,7 @@ $error-red: #D63A3A;
     height: 100%;
     width: 100%;
   }
-  
+
   .interaction-panel {
     position: absolute;
     z-index: 1000; // leaflet map is at 999
@@ -28,7 +28,7 @@ $error-red: #D63A3A;
     pointer-events: none;
 
     .map-controls-container {
-      margin: 10px;
+      margin: 10px 10px 10px 55px;
 
       &>.item {
         pointer-events: auto;
