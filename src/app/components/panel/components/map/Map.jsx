@@ -2,7 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { Map as LeafLetMap, TileLayer, Polyline } from 'react-leaflet';
+import {
+  Map as LeafLetMap,
+  TileLayer,
+  Polyline,
+  CircleMarker,
+  Popup,
+  Tooltip
+} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Styles } from './assets'; // eslint-disable-line
 import * as mapActions from './Map.actions';
@@ -31,10 +38,31 @@ class Map extends React.Component {
   }
 
   rendertrackerData() {
+    const coords = this.mapCoords(this.trackerCoords());
+    const lastPosition = coords[coords.length - 1];
+
+    const popupData = () => (
+      <div>
+        Last known position<br />
+        lat: {lastPosition[0]}<br />
+        long: {lastPosition[1]}<br />
+      </div>
+    );
+
     return (
-      <Polyline
-        positions={this.mapCoords(this.trackerCoords())}
-      />
+      <div>
+        <Polyline
+          positions={coords}
+        />
+        <CircleMarker center={lastPosition} color="red" radius={20}>
+          <Popup>
+            {popupData()}
+          </Popup>
+          <Tooltip>
+            {popupData()}
+          </Tooltip>
+        </CircleMarker>
+      </div>
     );
   }
 
@@ -86,7 +114,6 @@ class Map extends React.Component {
           {trackerHasData() && this.rendertrackerData()}}
         </LeafLetMap>
         <div className="message-container">
-          {}
           {areAnyActive() ?
             !trackerHasData() && noDataError() :
             noTrackerActive()}
