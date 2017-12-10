@@ -7,10 +7,6 @@ import { Styles } from './assets'; // eslint-disable-line
 import { Landing, Panel } from './components';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.actions.handleLogin(); // dev
-  }
-
   render() {
     if (this.props.user.authorized) {
       return (
@@ -26,7 +22,6 @@ class App extends Component {
     return (
       <div>
         <Landing
-          user={this.props.user}
           handleRegister={this.props.actions.handleRegister}
           handleLogin={this.props.actions.handleLogin}
         />
@@ -54,10 +49,17 @@ App.defaultProps = {
   panel: {}
 };
 
-const mapStateToProps = state => ({
-  user: state.app.user,
-  panel: state.panel
-});
+// const mapStateToProps = state => ({
+//   user: state.app.user,
+//   panel: state.panel
+// });
+const mapStateToProps = (state) => {
+  console.log('App state', state)
+  return ({
+    user: state.app.user,
+    panel: state.panel
+  });
+};
 
 const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(appActions, dispatch) });
 

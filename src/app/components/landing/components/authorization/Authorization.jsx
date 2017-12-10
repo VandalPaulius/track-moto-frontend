@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { submit } from 'redux-form';
 import { Styles } from './assets'; // eslint-disable-line
+import { LoginForm, RegisterForm } from './components';
 
 class Authorization extends React.Component {
   constructor(props) {
@@ -8,115 +11,70 @@ class Authorization extends React.Component {
 
     this.state = {
       drawerOpen: ''
-    }
+    };
   }
 
-  drawerLeft = ({ isOpen }) => {
-    const loginForm = () => (
-      <div>
-        <div className="item">
-          <span className="label">email</span>
-          <input className="value" />
-        </div>
-        <div className="item">
-          <span className="label">password</span>
-          <input className="value" />
-        </div>
-      </div>
-    );
-
-    const loginButton = ({ className }) => (
-      <button
-        className={className}
-        onClick={() => this.props.handleLogin({})}
-      >
-        Log in
-      </button>
-    );
-
+  drawerLeft({ isOpen }) {
     return (
       <div
-        onMouseEnter={() => this.setState((state) => ({
+        onClick={() => this.setState((state) => ({
           ...state,
           drawerOpen: 'left'
         }))}
-        onMouseLeave={() => this.setState((state) => ({
-          ...state,
-          drawerOpen: ''
-        }))}
         className={`drawer ${isOpen && 'open'}`}
       >
-        <div className="auth-form">
-          {isOpen && loginForm()}
-            <div className="button-panel">
-              {loginButton({ className: 'button light' })}
+        <div>
+          {isOpen ? (
+            <LoginForm
+              form="loginForm"
+              onSubmit={this.props.handleLogin}
+            />
+          ) : (
+            <div>
+              Login
             </div>
+          )}
         </div>
       </div>
-    )
+    );
   }
 
-  drawerRight = ({ isOpen }) => {
-    const registerForm = () => (
-      <div>
-        <div className="item">
-          <span className="label">email</span>
-          <input className="value" />
-        </div>
-        <div className="item">
-          <span className="label">password</span>
-          <input className="value" />
-        </div>
-        <div className="item">
-          <span className="label">password repeat</span>
-          <input className="value" />
-        </div>
-      </div>
-    );
-
-    const registerButton = ({ className }) => (
-      <button
-        className={className}
-        onClick={() => this.props.handleRegister({})}
-      >
-        Register
-      </button>
-    );
-
+  drawerRight({ isOpen }) {
     return (
       <div
-        onMouseEnter={() => this.setState((state) => ({
+        onClick={() => this.setState(state => ({
           ...state,
           drawerOpen: 'right'
         }))}
-        onMouseLeave={() => this.setState((state) => ({
-          ...state,
-          drawerOpen: ''
-        }))}
         className={`drawer ${isOpen && 'open'}`}
       >
         <div className="auth-form">
-          {isOpen && registerForm()}
-          <div className="button-panel">
-            {registerButton({ className: 'button light' })}
-          </div>
+          {isOpen ? (
+            <RegisterForm
+              form="registerForm"
+              onSubmit={this.props.handleRegister}
+            />
+          ) : (
+            <div>
+              Register
+            </div>
+          )}
         </div>
       </div>
-    )
+    );
   }
 
   render() {
     return (
       <div className="authorization">
-        {this.drawerLeft({ isOpen: this.state.drawerOpen  === 'left' })}
-        {this.drawerRight({ isOpen: this.state.drawerOpen  === 'right' })}
+        {this.drawerLeft({ isOpen: this.state.drawerOpen === 'left' })}
+        {this.drawerRight({ isOpen: this.state.drawerOpen === 'right' })}
       </div>
     );
   }
 }
 
 Authorization.propTypes = {
-  user: PropTypes.shape({}),
   handleRegister: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired
 };
@@ -125,4 +83,4 @@ Authorization.defaultProps = {
 
 };
 
-export default Authorization;
+export default connect()(Authorization);

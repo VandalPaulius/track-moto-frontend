@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import * as constants from './App.constants';
 
 function appReducer(state = {}, action) {
@@ -19,7 +18,6 @@ function appReducer(state = {}, action) {
           ...state.user,
           uid: action.data.uid,
           name: action.data.name,
-          token: action.data.token
         }
       };
     }
