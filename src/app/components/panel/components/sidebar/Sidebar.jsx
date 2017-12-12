@@ -21,7 +21,7 @@ class Sidebar extends React.Component {
   }
 
   componentWillMount() {
-    this.props.handleLoadTrackers();
+    this.props.handleLoadTrackers(this.props.user.uid);
   }
 
   userMenu() {
@@ -122,7 +122,8 @@ Sidebar.propTypes = {
   handleLoadTrackers: PropTypes.func.isRequired,
   trackers: PropTypes.arrayOf(PropTypes.shape({})),
   user: PropTypes.shape({
-    name: PropTypes.string
+    name: PropTypes.string,
+    uid: PropTypes.string
   })
 };
 

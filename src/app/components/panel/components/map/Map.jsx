@@ -23,7 +23,7 @@ class Map extends React.Component {
     if (this.props.tracker) {
       this.props.actions.handleLoadTrackerCoord(
         this.props.tracker.uid,
-        this.props.user
+        this.props.userUid
       );
     }
   }
@@ -33,8 +33,8 @@ class Map extends React.Component {
   }
 
   trackerCoords() {
-    const trackerData = this.props.mapData.find(trackerData =>
-      trackerData.trackerUid === this.props.tracker.uid);
+    const trackerData = this.props.mapData.find(data =>
+      data.trackerUid === this.props.tracker.uid);
 
     if (trackerData) {
       return trackerData.coords;
@@ -157,13 +157,13 @@ Map.propTypes = {
   actions: PropTypes.shape({
     handleLoadTrackerCoord: PropTypes.func.isRequired
   }).isRequired,
-  user: PropTypes.shape({}),
+  userUid: PropTypes.string,
   mapData: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 Map.defaultProps = {
   tracker: {},
-  user: {},
+  user: '',
   mapData: []
 };
 

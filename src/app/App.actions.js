@@ -32,20 +32,20 @@ const setUserData = data => ({
 // };
 
 const handleRegisterEvent = (userData) => {
-  console.log('userData', userData);
   return (dispatch) => {
     const isValid = (data) => {
       if (data.password !== data.passwordRepeat) {
-        dispatch(coreMessageEmit('error', 'Error: passwords do not match'));
+        coreMessageEmit('error', 'Error: passwords do not match');
         return;
       }
+      return true;
     };
 
     if (!isValid(userData)) {
       return;
     }
 
-    fetch(`${process.env.REACT_APP_API_URL}/user`, {
+    fetch(`${process.env.REACT_APP_API_URL}/users`, {
       method: 'POST',
       mode: 'cors',
       credentials: 'include',
@@ -58,13 +58,10 @@ const handleRegisterEvent = (userData) => {
     })
       .then((res) => {
         if (res.ok) {
-          const data = {
-            uid: 'userUid',
-            name: 'User Useriano',
-          };
-
-          dispatch(setUserData(data));
-          dispatch(setAuthorizedStatus(true));
+          res.json().then((body) => {
+            dispatch(setUserData(body));
+            dispatch(setAuthorizedStatus(true));
+          });
         } else {
           res.text().then(text => coreMessageEmit('error', `Error: ${text}`));
         }
@@ -85,7 +82,7 @@ const handleLoginEvent = (userData) => {
   // };
   console.log('userData', userData);
   return (dispatch) => {
-    fetch(`${process.env.REACT_APP_API_URL}/user`, {
+    fetch(`${process.env.REACT_APP_API_URL}/users`, {
       method: 'POST',
       mode: 'cors',
       credentials: 'include',
@@ -97,13 +94,10 @@ const handleLoginEvent = (userData) => {
     })
       .then((res) => {
         if (res.ok) {
-          const data = {
-            uid: 'userUid',
-            name: 'User Useriano',
-          };
-
-          dispatch(setUserData(data));
-          dispatch(setAuthorizedStatus(true));
+          res.json().then((body) => {
+            dispatch(setUserData(body));
+            dispatch(setAuthorizedStatus(true));
+          });
         } else {
           res.text().then(text => coreMessageEmit('error', `Error: ${text}`));
         }

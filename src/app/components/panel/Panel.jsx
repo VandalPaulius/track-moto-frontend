@@ -20,7 +20,7 @@ class Panel extends React.Component {
         <Map
           tracker={this.props.trackers.find(tracker =>
             tracker.active && tracker)}
-          user={this.props.user}
+          userUid={this.props.user}
         />
       </div>
     );
