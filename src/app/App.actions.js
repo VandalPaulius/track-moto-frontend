@@ -122,6 +122,7 @@ const handleLogoutEvent = (userUid) => {
         if (res.ok) {
           res.json().then((body) => {
             dispatch({ type: constants.APPLICATION__LOGOUT_USER });
+            dispatch({ type: 'RESET_STATE' });
           });
         } else {
           res.text().then(text => coreMessageEmit('error', `Error: ${text}`));
