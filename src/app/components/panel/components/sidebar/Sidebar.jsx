@@ -65,7 +65,7 @@ class Sidebar extends React.Component {
               {menuItem(
                 <div
                   className="item"
-                  onClick={() => this.props.handleLogout()}
+                  onClick={() => this.props.handleLogout(this.props.user.uid)}
                 >
                   log out
                 </div>
