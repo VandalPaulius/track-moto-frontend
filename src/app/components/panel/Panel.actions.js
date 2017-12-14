@@ -33,7 +33,7 @@ const coreMessageEmit = (type, message) => {
 
 const handleLoadTrackersEvent = (userUid) => {
   return (dispatch) => {
-    fetch(`${process.env.REACT_APP_API_URL}/users/${userUid}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/users/${userUid}/trackers`, {
       method: 'GET',
       mode: 'cors',
       credentials: 'include'

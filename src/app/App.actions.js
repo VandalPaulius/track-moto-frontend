@@ -45,10 +45,9 @@ const handleRegisterEvent = (userData) => {
       return;
     }
 
-    fetch(`${process.env.REACT_APP_API_URL}/users`, {
+    fetch(`${process.env.REACT_APP_API_URL}/auth`, {
       method: 'POST',
       mode: 'cors',
-      credentials: 'include',
       headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify({
         email: userData.email,
@@ -82,10 +81,9 @@ const handleLoginEvent = (userData) => {
   // };
   console.log('userData', userData);
   return (dispatch) => {
-    fetch(`${process.env.REACT_APP_API_URL}/users`, {
+    fetch(`${process.env.REACT_APP_API_URL}/auth`, {
       method: 'POST',
       mode: 'cors',
-      credentials: 'include',
       headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify({
         email: userData.email,
@@ -106,9 +104,32 @@ const handleLoginEvent = (userData) => {
   };
 };
 
-const handleLogoutEvent = () => ({
-  type: constants.APPLICATION__LOGOUT_USER
-});
+// const handleLogoutEvent = () => ({
+//   type: constants.APPLICATION__LOGOUT_USER
+// });
+const handleLogoutEvent = (userUid) => {
+  return (dispatch) => {
+    fetch(`${process.env.REACT_APP_API_URL}/auth`, {
+      method: 'DELETE',
+      mode: 'cors',
+      credentials: 'include',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify({
+        email: userUid
+      })
+    })
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((body) => {
+            dispatch({ type: constants.APPLICATION__LOGOUT_USER });
+          });
+        } else {
+          res.text().then(text => coreMessageEmit('error', `Error: ${text}`));
+        }
+      })
+      .catch(err => coreMessageEmit('error', `Error: ${err}`));
+  };
+};
 
 export const handleRegister = handleRegisterEvent;
 export const handleLogin = handleLoginEvent;

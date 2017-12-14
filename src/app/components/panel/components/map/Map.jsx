@@ -163,7 +163,7 @@ Map.propTypes = {
 
 Map.defaultProps = {
   tracker: {},
-  user: '',
+  userUid: '',
   mapData: []
 };
 
