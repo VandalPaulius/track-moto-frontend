@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Styles } from './assets'; // eslint-disable-line
 import { Modal } from '../modal';
-import { Trackers as TrackerSettings } from './components';
+import {
+  Trackers as TrackerSettings,
+  Settings as GeneralSettings
+} from './components';
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -10,7 +13,8 @@ class Sidebar extends React.Component {
 
     this.state = {
       userMenuExpanded: false,
-      isTrackerSettingsOpen: true//false
+      isTrackerSettingsOpen: false,
+      isGeneralSettingsOpen: true
     };
 
     this.actions = {
@@ -24,6 +28,12 @@ class Sidebar extends React.Component {
         this.setState(state => ({
           ...state,
           isTrackerSettingsOpen: isOpen
+        }));
+      },
+      toggleGeneralSettings: (isOpen) => {
+        this.setState(state => ({
+          ...state,
+          isGeneralSettingsOpen: isOpen
         }));
       }
     };
@@ -59,7 +69,7 @@ class Sidebar extends React.Component {
             <div onMouseLeave={() => this.actions.toggleUserMenu(false)}>
               {userName(() => this.actions.toggleUserMenu(false))}
               {menuItem('trackers', () => this.actions.toggleTrackerSettings(true))}
-              {menuItem('settings', () => console.log('open settings modal'))}
+              {menuItem('settings', () => this.actions.toggleGeneralSettings(true))}
               {menuItem('log out', () => this.props.handleLogout())}
             </div>
           ) :
@@ -98,6 +108,12 @@ class Sidebar extends React.Component {
           onClose={() => this.actions.toggleTrackerSettings(false)}
         >
           <TrackerSettings />
+        </Modal>
+        <Modal
+          isOpen={this.state.isGeneralSettingsOpen}
+          onClose={() => this.actions.toggleGeneralSettings(false)}
+        >
+          <GeneralSettings />
         </Modal>
       </div>
     );
