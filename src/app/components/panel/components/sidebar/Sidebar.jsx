@@ -25,8 +25,11 @@ class Sidebar extends React.Component {
   }
 
   userMenu() {
-    const menuItem = content => (
-      <div>
+    const menuItem = (content, clickAction) => (
+      <div
+        className="item"
+        onClick={clickAction}
+      >
         {content}
       </div>
     );
@@ -46,30 +49,9 @@ class Sidebar extends React.Component {
           (
             <div onMouseLeave={() => this.actions.toggleUserMenu(false)}>
               {userName(() => this.actions.toggleUserMenu(false))}
-              {menuItem(
-                <div
-                  className="item"
-                  onClick={() => console.log('open trackers modal')}
-                >
-                  trackers
-                </div>
-              )}
-              {menuItem(
-                <div
-                  className="item"
-                  onClick={() => console.log('open settings modal')}
-                >
-                  settings
-                </div>
-              )}
-              {menuItem(
-                <div
-                  className="item"
-                  onClick={() => this.props.handleLogout()}
-                >
-                  log out
-                </div>
-              )}
+              {menuItem('trackers', () => console.log('open trackers modal'))}
+              {menuItem('settings', () => console.log('open settings modal'))}
+              {menuItem('log out', () => this.props.handleLogout())}
             </div>
           ) :
           userName(() => this.actions.toggleUserMenu(true))
