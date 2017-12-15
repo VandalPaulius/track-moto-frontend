@@ -14,11 +14,15 @@ class Trackers extends React.Component {
 }
 
 Trackers.propTypes = {
-  
+  handleAddTracker: PropTypes.func.isRequired,
+  handleRemoveTracker: PropTypes.func.isRequired,
+  trackers: PropTypes.arrayOf(PropTypes.shape({})),
+  userUid: PropTypes.string
 };
 
 Trackers.defaultProps = {
-
+  trackers: [],
+  userUid: ''
 };
 
 export default Trackers;

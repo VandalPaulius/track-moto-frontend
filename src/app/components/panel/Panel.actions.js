@@ -28,5 +28,31 @@ const handleSetActiveTrackerEvent = uid => ({
   data: uid
 });
 
+const handleAddTrackerEvent = (userUid) => {
+  return (dispatch) => {
+    const data = {
+      uid: 'trackerUid4',
+      name: 'K1300S',
+      status: 'tracking',
+    };
+
+    dispatch({
+      type: constants.APPLICATION__PANEL__ADD_TRACKER,
+      data
+    });
+  };
+};
+
+const handleRemoveTrackerEvent = (userUid, trackerUid) => {
+  return (dispatch) => {
+    dispatch({
+      type: constants.APPLICATION__PANEL__REMOVE_TRACKER,
+      trackerUid
+    });
+  };
+};
+
 export const handleLoadTrackers = handleLoadTrackersEvent;
 export const handleSetActiveTracker = handleSetActiveTrackerEvent;
+export const handleAddTracker = handleAddTrackerEvent;
+export const handleRemoveTracker = handleRemoveTrackerEvent;

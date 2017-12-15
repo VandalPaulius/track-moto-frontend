@@ -97,7 +97,12 @@ class Sidebar extends React.Component {
           isOpen={this.state.isTrackerSettingsOpen}
           onClose={() => this.actions.toggleTrackerSettings(false)}
         >
-          <TrackerSettings />
+          <TrackerSettings
+            handleAddTracker={this.props.handleAddTracker}
+            handleRemoveTracker={this.props.handleRemoveTracker}
+            trackers={this.props.trackers}
+            userUid={this.props.user.uid}
+          />
         </Modal>
       </div>
     );
@@ -125,9 +130,12 @@ class Sidebar extends React.Component {
 Sidebar.propTypes = {
   handleLogout: PropTypes.func.isRequired,
   handleLoadTrackers: PropTypes.func.isRequired,
+  handleAddTracker: PropTypes.func.isRequired,
+  handleRemoveTracker: PropTypes.func.isRequired,
   trackers: PropTypes.arrayOf(PropTypes.shape({})),
   user: PropTypes.shape({
-    name: PropTypes.string
+    name: PropTypes.string,
+    uid: PropTypes.string
   })
 };
 

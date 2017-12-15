@@ -16,6 +16,8 @@ class Panel extends React.Component {
           handleLoadTrackers={this.props.actions.handleLoadTrackers}
           trackers={this.props.trackers}
           handleSetActiveTracker={this.props.actions.handleSetActiveTracker}
+          handleAddTracker={this.props.actions.handleAddTracker}
+          handleRemoveTracker={this.props.actions.handleRemoveTracker}
         />
         <Map
           tracker={this.props.trackers.find(tracker =>
@@ -32,7 +34,9 @@ Panel.propTypes = {
   handleLogout: PropTypes.func.isRequired,
   actions: PropTypes.shape({
     handleLoadTrackers: PropTypes.func.isRequired,
-    handleSetActiveTracker: PropTypes.func.isRequired
+    handleSetActiveTracker: PropTypes.func.isRequired,
+    handleAddTracker: PropTypes.func.isRequired,
+    handleRemoveTracker: PropTypes.func.isRequired
   }).isRequired,
   trackers: PropTypes.arrayOf(PropTypes.shape())
 };
