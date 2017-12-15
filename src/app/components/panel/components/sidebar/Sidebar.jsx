@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Styles } from './assets'; // eslint-disable-line
+import { Modal } from '../modal';
+import { Trackers as TrackerSettings } from './components';
 
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      userMenuExpanded: false
+      userMenuExpanded: false,
+      isTrackerSettingsOpen: true//false
     };
 
     this.actions = {
@@ -15,6 +18,12 @@ class Sidebar extends React.Component {
         this.setState(state => ({
           ...state,
           userMenuExpanded: isOpen
+        }));
+      },
+      toggleTrackerSettings: (isOpen) => {
+        this.setState(state => ({
+          ...state,
+          isTrackerSettingsOpen: isOpen
         }));
       }
     };
@@ -49,7 +58,7 @@ class Sidebar extends React.Component {
           (
             <div onMouseLeave={() => this.actions.toggleUserMenu(false)}>
               {userName(() => this.actions.toggleUserMenu(false))}
-              {menuItem('trackers', () => console.log('open trackers modal'))}
+              {menuItem('trackers', () => this.actions.toggleTrackerSettings(true))}
               {menuItem('settings', () => console.log('open settings modal'))}
               {menuItem('log out', () => this.props.handleLogout())}
             </div>
@@ -81,6 +90,19 @@ class Sidebar extends React.Component {
     );
   }
 
+  modalWrapper() {
+    return (
+      <div>
+        <Modal
+          isOpen={this.state.isTrackerSettingsOpen}
+          onClose={() => this.actions.toggleTrackerSettings(false)}
+        >
+          <TrackerSettings />
+        </Modal>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="sidebar">
@@ -94,6 +116,7 @@ class Sidebar extends React.Component {
             track-moto.com
           </a>
         </div>
+        {this.modalWrapper()}
       </div>
     );
   }
