@@ -16,8 +16,10 @@ class Panel extends React.Component {
           handleLoadTrackers={this.props.actions.handleLoadTrackers}
           trackers={this.props.trackers}
           handleSetActiveTracker={this.props.actions.handleSetActiveTracker}
-          handleAddTracker={this.props.actions.handleAddTracker}
+          handleSaveTracker={this.props.actions.handleSaveTracker}
           handleRemoveTracker={this.props.actions.handleRemoveTracker}
+          handleEditTracker={this.props.actions.handleEditTracker}
+          editableTrackers={this.props.editableTrackers}
         />
         <Map
           tracker={this.props.trackers.find(tracker =>
@@ -35,15 +37,18 @@ Panel.propTypes = {
   actions: PropTypes.shape({
     handleLoadTrackers: PropTypes.func.isRequired,
     handleSetActiveTracker: PropTypes.func.isRequired,
-    handleAddTracker: PropTypes.func.isRequired,
-    handleRemoveTracker: PropTypes.func.isRequired
+    handleSaveTracker: PropTypes.func.isRequired,
+    handleRemoveTracker: PropTypes.func.isRequired,
+    handleEditTracker: PropTypes.func.isRequired
   }).isRequired,
-  trackers: PropTypes.arrayOf(PropTypes.shape())
+  trackers: PropTypes.arrayOf(PropTypes.shape()),
+  editableTrackers: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 Panel.defaultProps = {
   user: {},
-  trackers: []
+  trackers: [],
+  editableTrackers: []
 };
 
 const mapDispatchToProps = dispatch => ({

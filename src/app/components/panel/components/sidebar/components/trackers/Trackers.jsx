@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Styles } from './assets'; // eslint-disable-line
+import { TrackerForm } from './components';
 
 class Trackers extends React.Component {
   constructor(props) {
@@ -33,7 +34,10 @@ class Trackers extends React.Component {
         </div>
         {tracker.uid === this.state.showTrackerMenu && (
           <div className="button-panel">
-            <div>
+            <div
+              className="button"
+              onClick={() => this.props.handleEditTracker(tracker)}
+            >
               Edit
             </div>
             <div
@@ -48,11 +52,22 @@ class Trackers extends React.Component {
       </div>
     );
 
+    const saveTrackerOnSubmit = formData =>
+      this.props.handleSaveTracker(this.props.userUid, formData);
+
     return (
       <div className="trackers-list">
         {this.props.trackers.map((tracker) => {
-          if (this.props.editable.find(uid => uid === tracker.uid)) {
-            return (<div>Form</div>);
+          const editableTrackerIndex = this.props.editableTrackers.findIndex(uid =>
+            uid === tracker.uid);
+          if (editableTrackerIndex > -1) {
+            return (
+              <TrackerForm
+                form={`form-${tracker.uid}-tracker-edit`}
+                initialValues={this.props.editableTrackers[editableTrackerIndex]}
+                onSubmit={saveTrackerOnSubmit}
+              />
+            );
           }
           return details(tracker);
         })}
@@ -78,17 +93,18 @@ class Trackers extends React.Component {
 }
 
 Trackers.propTypes = {
-  handleAddTracker: PropTypes.func.isRequired,
+  handleSaveTracker: PropTypes.func.isRequired,
   handleRemoveTracker: PropTypes.func.isRequired,
+  handleEditTracker: PropTypes.func.isRequired,
   trackers: PropTypes.arrayOf(PropTypes.shape({})),
   userUid: PropTypes.string,
-  editable: PropTypes.arrayOf(PropTypes.string)
+  editableTrackers: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 Trackers.defaultProps = {
   trackers: [],
   userUid: '',
-  editable: []
+  editableTrackers: []
 };
 
 export default Trackers;

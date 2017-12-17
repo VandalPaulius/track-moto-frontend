@@ -98,10 +98,12 @@ class Sidebar extends React.Component {
           onClose={() => this.actions.toggleTrackerSettings(false)}
         >
           <TrackerSettings
-            handleAddTracker={this.props.handleAddTracker}
+            handleSaveTracker={this.props.handleSaveTracker}
             handleRemoveTracker={this.props.handleRemoveTracker}
+            handleEditTracker={this.props.handleEditTracker}
             trackers={this.props.trackers}
             userUid={this.props.user.uid}
+            editableTrackers={this.props.editableTrackers}
           />
         </Modal>
       </div>
@@ -130,18 +132,21 @@ class Sidebar extends React.Component {
 Sidebar.propTypes = {
   handleLogout: PropTypes.func.isRequired,
   handleLoadTrackers: PropTypes.func.isRequired,
-  handleAddTracker: PropTypes.func.isRequired,
+  handleSaveTracker: PropTypes.func.isRequired,
   handleRemoveTracker: PropTypes.func.isRequired,
+  handleEditTracker: PropTypes.func.isRequired,
   trackers: PropTypes.arrayOf(PropTypes.shape({})),
   user: PropTypes.shape({
     name: PropTypes.string,
     uid: PropTypes.string
-  })
+  }),
+  editableTrackers: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 Sidebar.defaultProps = {
   trackers: [],
-  user: {}
+  user: {},
+  editableTrackers: []
 };
 
 export default Sidebar;
