@@ -47,7 +47,7 @@ const handleRemoveTrackerEvent = (userUid, trackerUid) => {
   return (dispatch) => {
     dispatch({
       type: constants.APPLICATION__PANEL__REMOVE_TRACKER,
-      trackerUid
+      data: trackerUid
     });
   };
 };

@@ -17,6 +17,12 @@ function panelReducer(state = {}, action) {
         }))
       };
     }
+    case constants.APPLICATION__PANEL__REMOVE_TRACKER: {
+      return {
+        ...state,
+        trackers: state.trackers.filter(tracker => tracker.uid !== action.data)
+      };
+    }
     default: {
       return state;
     }
