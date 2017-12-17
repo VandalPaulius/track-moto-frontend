@@ -18,37 +18,44 @@ class Trackers extends React.Component {
   }
 
   trackers() {
+    const details = tracker => (
+      <div
+        key={tracker.uid}
+        className="item"
+        onMouseEnter={() => this.actions.toggleTrackerMenu(tracker.uid)}
+        onMouseLeave={() => this.actions.toggleTrackerMenu()}
+      >
+        <div className="name">
+          {tracker.name}
+        </div>
+        <div className="status">
+          {tracker.status}
+        </div>
+        {tracker.uid === this.state.showTrackerMenu && (
+          <div className="button-panel">
+            <div>
+              Edit
+            </div>
+            <div
+              className="button"
+              onClick={() =>
+                this.props.handleRemoveTracker(this.props.userUid, tracker.uid)}
+            >
+              Remove
+            </div>
+          </div>
+        )}
+      </div>
+    );
+
     return (
       <div className="trackers-list">
-        {this.props.trackers.map((tracker, index) => (
-          <div
-            key={tracker.uid}
-            className="item"
-            onMouseEnter={() => this.actions.toggleTrackerMenu(tracker.uid)}
-            onMouseLeave={() => this.actions.toggleTrackerMenu()}
-          >
-            <div className="name">
-              {tracker.name}
-            </div>
-            <div className="status">
-              {tracker.status}
-            </div>
-            {tracker.uid === this.state.showTrackerMenu && (
-              <div className="button-panel">
-                <div>
-                  Edit
-                </div>
-                <div
-                  className="button"
-                  onClick={() =>
-                    this.props.handleRemoveTracker(this.props.userUid, tracker.uid)}
-                >
-                  Remove
-                </div>
-              </div>
-            )}
-          </div>
-        ))}
+        {this.props.trackers.map((tracker) => {
+          if (this.props.editable.find(uid => uid === tracker.uid)) {
+            return (<div>Form</div>);
+          }
+          return details(tracker);
+        })}
         <div className="item">
           <div className="button-panel">
             <div>
@@ -74,12 +81,14 @@ Trackers.propTypes = {
   handleAddTracker: PropTypes.func.isRequired,
   handleRemoveTracker: PropTypes.func.isRequired,
   trackers: PropTypes.arrayOf(PropTypes.shape({})),
-  userUid: PropTypes.string
+  userUid: PropTypes.string,
+  editable: PropTypes.arrayOf(PropTypes.string)
 };
 
 Trackers.defaultProps = {
   trackers: [],
-  userUid: ''
+  userUid: '',
+  editable: []
 };
 
 export default Trackers;
