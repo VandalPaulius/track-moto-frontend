@@ -26,15 +26,9 @@ function panelReducer(state = {}, action) {
     case constants.APPLICATION__PANEL__EDIT_TRACKER: {
       const editableTrackers = state.editableTrackers ?
         [...state.editableTrackers] : [];
-        console.log('Panel.reducer 1 editableTrackers', editableTrackers);
-        console.log('Panel.reducer state', state, 'action.data', action.data);
 
       const existingEditableTrackerIndex = editableTrackers.findIndex(tracker =>
         tracker.uid === action.data.uid);
-      // const existingTrackerIndex = state.trackers.findIndex(tracker =>
-      //   tracker.uid === action.data.uid);
-
-      console.log('Panel.reducer 2 existingEditableTrackerIndex', existingEditableTrackerIndex);
 
       if (existingEditableTrackerIndex > -1) {
         editableTrackers[existingEditableTrackerIndex] = [
@@ -45,11 +39,32 @@ function panelReducer(state = {}, action) {
         editableTrackers.push(action.data);
       }
 
-      console.log('Panel.reducer 3 editableTrackers', editableTrackers);
-
       return {
         ...state,
         editableTrackers
+      };
+    }
+    case constants.APPLICATION__PANEL__SAVE_TRACKER: {
+      const editableTrackers = state.editableTrackers.filter((tracker) => {
+        if (tracker.uid !== action.data.uid) {
+          return tracker;
+        }
+      });
+
+      const trackers = state.trackers.map((tracker) => {
+        if (tracker.uid === action.data.uid) {
+          return {
+            ...tracker,
+            ...action.data
+          };
+        }
+        return tracker;
+      });
+
+      return {
+        ...state,
+        editableTrackers,
+        trackers
       };
     }
     default: {

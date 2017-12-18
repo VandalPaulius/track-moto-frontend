@@ -47,11 +47,13 @@ const handleSaveTrackerEvent = (userUid, formData) => {
   return (dispatch) => {
     console.log('handleSaveTrackerEvent formData', formData);
 
-    const data = {
-      uid: 'trackerUid4',
-      name: 'K1300S',
-      status: 'tracking',
-    };
+    // const data = {
+    //   uid: 'trackerUid4',
+    //   name: 'K1300S',
+    //   status: 'tracking',
+    // };
+
+    const data = formData;
 
     dispatch({
       type: constants.APPLICATION__PANEL__SAVE_TRACKER,

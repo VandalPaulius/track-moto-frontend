@@ -58,11 +58,14 @@ class Trackers extends React.Component {
     return (
       <div className="trackers-list">
         {this.props.trackers.map((tracker) => {
-          const editableTrackerIndex = this.props.editableTrackers.findIndex(uid =>
-            uid === tracker.uid);
+          const editableTrackerIndex = this.props.editableTrackers.findIndex(editableTracker =>
+            editableTracker.uid === tracker.uid);
+          console.log('trackers-list editableTrackerIndex', editableTrackerIndex);
+
           if (editableTrackerIndex > -1) {
             return (
               <TrackerForm
+                key={`${tracker.uid}-form`}
                 form={`form-${tracker.uid}-tracker-edit`}
                 initialValues={this.props.editableTrackers[editableTrackerIndex]}
                 onSubmit={saveTrackerOnSubmit}
