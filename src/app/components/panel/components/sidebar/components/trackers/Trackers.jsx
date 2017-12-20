@@ -55,9 +55,27 @@ class Trackers extends React.Component {
     const saveTrackerOnSubmit = formData =>
       this.props.handleSaveTracker(this.props.userUid, formData);
 
+    const newTrackers = [];
+    this.props.editableTrackers.forEach((editableTracker) => {
+      if (!this.props.trackers.find(tracker => tracker.uid === editableTracker.uid)) {
+        newTrackers.push(editableTracker);
+      }
+    });
+
+    const trackers = [...this.props.trackers];
+
+    if (newTrackers.length > 0) {
+      //trackers.concat(newTrackers);
+      newTrackers.forEach(tracker => trackers.push(tracker));
+    }
+
+    console.log('newTrackers', newTrackers.length);
+
+    console.log('trackers', trackers);
+
     return (
       <div className="trackers-list">
-        {this.props.trackers.map((tracker) => {
+        {trackers.map((tracker) => {
           const editableTrackerIndex = this.props.editableTrackers.findIndex(editableTracker =>
             editableTracker.uid === tracker.uid);
           console.log('trackers-list editableTrackerIndex', editableTrackerIndex);
@@ -76,7 +94,10 @@ class Trackers extends React.Component {
         })}
         <div className="item">
           <div className="button-panel">
-            <div>
+            <div
+              className="button"
+              onClick={() => this.props.handleEditTracker(`newTracker${newTrackers.length}`)}
+            >
               Add tracker
             </div>
           </div>

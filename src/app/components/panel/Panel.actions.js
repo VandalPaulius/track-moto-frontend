@@ -28,32 +28,18 @@ const handleSetActiveTrackerEvent = uid => ({
   data: uid
 });
 
-// const handleSaveTrackerEvent = (userUid) => {
-//   return (dispatch) => {
-//     const data = {
-//       uid: 'trackerUid4',
-//       name: 'K1300S',
-//       status: 'tracking',
-//     };
-
-//     dispatch({
-//       type: constants.APPLICATION__PANEL__SAVE_TRACKER,
-//       data
-//     });
-//   };
-// };
-
 const handleSaveTrackerEvent = (userUid, formData) => {
   return (dispatch) => {
-    console.log('handleSaveTrackerEvent formData', formData);
+    // dev start
+    const data = formData;
+    // if ()
 
     // const data = {
-    //   uid: 'trackerUid4',
-    //   name: 'K1300S',
-    //   status: 'tracking',
-    // };
+    //   ...formData,
+    //   uid: formData.uid + formData.uid
+    // }
 
-    const data = formData;
+    // dev end
 
     dispatch({
       type: constants.APPLICATION__PANEL__SAVE_TRACKER,

@@ -36,7 +36,8 @@ function panelReducer(state = {}, action) {
           ...action.data
         ];
       } else {
-        editableTrackers.push(action.data);
+        // editableTrackers.push(action.data);
+        editableTrackers.push({ uid: action.data });
       }
 
       return {
@@ -45,6 +46,8 @@ function panelReducer(state = {}, action) {
       };
     }
     case constants.APPLICATION__PANEL__SAVE_TRACKER: {
+      console.log('APPLICATION__PANEL__SAVE_TRACKER action.data', action.data);
+
       const editableTrackers = state.editableTrackers.filter((tracker) => {
         if (tracker.uid !== action.data.uid) {
           return tracker;
