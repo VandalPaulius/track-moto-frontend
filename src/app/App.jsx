@@ -7,10 +7,6 @@ import { Styles } from './assets'; // eslint-disable-line
 import { Landing, Panel } from './components';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.actions.handleLogin(); // dev
-  }
-
   render() {
     if (this.props.user.authorized) {
       return (
