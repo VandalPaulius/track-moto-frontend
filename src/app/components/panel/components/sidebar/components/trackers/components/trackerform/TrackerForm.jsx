@@ -23,8 +23,6 @@ function TrackerForm(props) {
         >
           Save
         </button>
-      </div>
-      <div className="button-panel">
         <button
           className="button light"
           onClick={() => props.cancelEdit(props.initialValues.uid)}
