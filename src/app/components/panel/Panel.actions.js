@@ -1,3 +1,4 @@
+import uuidv1 from 'uuid/v1';
 import * as constants from './Panel.constants';
 
 const handleLoadTrackersEvent = (userData) => {
@@ -28,5 +29,47 @@ const handleSetActiveTrackerEvent = uid => ({
   data: uid
 });
 
+const handleSaveTrackerEvent = (userUid, formData) => {
+  return (dispatch) => {
+    const data = formData;
+
+    dispatch({
+      type: constants.APPLICATION__PANEL__SAVE_TRACKER,
+      data
+    });
+  };
+};
+
+const handleRemoveTrackerEvent = (userUid, trackerUid) => {
+  return (dispatch) => {
+    dispatch({
+      type: constants.APPLICATION__PANEL__REMOVE_TRACKER,
+      data: trackerUid
+    });
+  };
+};
+
+const handleEditTrackerEvent = (tracker, isNew) => {
+  if (!tracker) {
+    tracker = {}; // eslint-disable-line no-param-reassign
+  }
+  if (isNew) {
+    tracker.uid = `temp-${uuidv1()}`; // eslint-disable-line no-param-reassign
+  }
+  return ({
+    type: constants.APPLICATION__PANEL__EDIT_TRACKER,
+    data: { tracker, isNew }
+  });
+};
+
+const handleTrackerEditCancelEvent = uid => ({
+  type: constants.APPLICATION__PANEL__EDIT_TRACKER_CANCEL,
+  data: uid
+});
+
 export const handleLoadTrackers = handleLoadTrackersEvent;
 export const handleSetActiveTracker = handleSetActiveTrackerEvent;
+export const handleSaveTracker = handleSaveTrackerEvent;
+export const handleRemoveTracker = handleRemoveTrackerEvent;
+export const handleEditTracker = handleEditTrackerEvent;
+export const handleTrackerEditCancel = handleTrackerEditCancelEvent;

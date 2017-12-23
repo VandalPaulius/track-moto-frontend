@@ -10,7 +10,7 @@ class Sidebar extends React.Component {
 
     this.state = {
       userMenuExpanded: false,
-      isTrackerSettingsOpen: true//false
+      isTrackerSettingsOpen: false
     };
 
     this.actions = {
@@ -97,7 +97,15 @@ class Sidebar extends React.Component {
           isOpen={this.state.isTrackerSettingsOpen}
           onClose={() => this.actions.toggleTrackerSettings(false)}
         >
-          <TrackerSettings />
+          <TrackerSettings
+            handleSaveTracker={this.props.handleSaveTracker}
+            handleRemoveTracker={this.props.handleRemoveTracker}
+            handleEditTracker={this.props.handleEditTracker}
+            trackers={this.props.trackers}
+            userUid={this.props.user.uid}
+            editableTrackers={this.props.editableTrackers}
+            handleTrackerEditCancel={this.props.handleTrackerEditCancel}
+          />
         </Modal>
       </div>
     );
@@ -125,15 +133,22 @@ class Sidebar extends React.Component {
 Sidebar.propTypes = {
   handleLogout: PropTypes.func.isRequired,
   handleLoadTrackers: PropTypes.func.isRequired,
+  handleSaveTracker: PropTypes.func.isRequired,
+  handleRemoveTracker: PropTypes.func.isRequired,
+  handleEditTracker: PropTypes.func.isRequired,
+  handleTrackerEditCancel: PropTypes.func.isRequired,
   trackers: PropTypes.arrayOf(PropTypes.shape({})),
   user: PropTypes.shape({
-    name: PropTypes.string
-  })
+    name: PropTypes.string,
+    uid: PropTypes.string
+  }),
+  editableTrackers: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 Sidebar.defaultProps = {
   trackers: [],
-  user: {}
+  user: {},
+  editableTrackers: []
 };
 
 export default Sidebar;

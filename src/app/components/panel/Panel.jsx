@@ -16,6 +16,11 @@ class Panel extends React.Component {
           handleLoadTrackers={this.props.actions.handleLoadTrackers}
           trackers={this.props.trackers}
           handleSetActiveTracker={this.props.actions.handleSetActiveTracker}
+          handleSaveTracker={this.props.actions.handleSaveTracker}
+          handleRemoveTracker={this.props.actions.handleRemoveTracker}
+          handleEditTracker={this.props.actions.handleEditTracker}
+          handleTrackerEditCancel={this.props.actions.handleTrackerEditCancel}
+          editableTrackers={this.props.editableTrackers}
         />
         <Map
           tracker={this.props.trackers.find(tracker =>
@@ -32,14 +37,20 @@ Panel.propTypes = {
   handleLogout: PropTypes.func.isRequired,
   actions: PropTypes.shape({
     handleLoadTrackers: PropTypes.func.isRequired,
-    handleSetActiveTracker: PropTypes.func.isRequired
+    handleSetActiveTracker: PropTypes.func.isRequired,
+    handleSaveTracker: PropTypes.func.isRequired,
+    handleRemoveTracker: PropTypes.func.isRequired,
+    handleEditTracker: PropTypes.func.isRequired,
+    handleTrackerEditCancel: PropTypes.func.isRequired
   }).isRequired,
-  trackers: PropTypes.arrayOf(PropTypes.shape())
+  trackers: PropTypes.arrayOf(PropTypes.shape()),
+  editableTrackers: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 Panel.defaultProps = {
   user: {},
-  trackers: []
+  trackers: [],
+  editableTrackers: []
 };
 
 const mapDispatchToProps = dispatch => ({
