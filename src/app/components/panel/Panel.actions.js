@@ -32,6 +32,7 @@ const handleSetActiveTrackerEvent = uid => ({
 const handleSaveTrackerEvent = (userUid, formData) => {
   return (dispatch) => {
     // dev start
+    console.log('formData', formData);
     const data = formData;
     // if ()
 

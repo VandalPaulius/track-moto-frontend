@@ -82,6 +82,59 @@ function panelReducer(state = {}, action) {
     //     trackers
     //   };
     // }
+    case constants.APPLICATION__PANEL__SAVE_TRACKER: {
+      console.log('APPLICATION__PANEL__SAVE_TRACKER action.data', action.data);
+
+      const editableTrackers = state.editableTrackers.filter((tracker) => {
+        if (tracker.uid !== action.data.uid) {
+          return tracker;
+        }
+      });
+
+      // const trackers = state.trackers.map((tracker) => {
+      //   if (tracker.uid === action.data.uid) {
+      //     return {
+      //       ...tracker,
+      //       ...action.data
+      //     };
+      //   }
+      //   return tracker;
+      // });
+
+      const trackers = [...state.trackers];
+
+      // const editedTracker = trackers.find(tracker =>
+      //   tracker.uid === action.data.uid);
+
+      // console.log('editedTracker', editedTracker);
+
+      // if (!editedTracker) {
+      //   trackers.forEach((tracker) => {
+      //     if (tracker.uid === action.data.uid) {
+      //       tracker = action.data;
+      //     }
+      //   })
+      // } else {
+      //   trackers.push(action.data);
+      // }
+
+      const editedTrackerIndex = trackers.findIndex(tracker =>
+        tracker.uid === action.data.uid);
+
+      console.log('editedTrackerIndex', editedTrackerIndex);
+
+      if (editedTrackerIndex > -1) {
+        trackers[editedTrackerIndex] = action.data;
+      } else {
+        trackers.push(action.data);
+      }
+
+      return {
+        ...state,
+        editableTrackers,
+        trackers
+      };
+    }
     default: {
       return state;
     }
