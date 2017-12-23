@@ -18,7 +18,7 @@ function TrackerForm(props) {
       </div>
       <div className="button-panel">
         <button
-          className="button light"
+          className="button dark"
           onClick={() => props.handleSubmit()}
         >
           Save
