@@ -168,7 +168,7 @@ Map.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-  console.log('Map state', state);
+  //console.log('Map state', state);
   return ({
     mapData: state.map.mapData,
   });

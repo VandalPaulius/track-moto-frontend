@@ -1,3 +1,4 @@
+import uuidv1 from 'uuid/v1';
 import * as constants from './Panel.constants';
 
 const handleLoadTrackersEvent = (userData) => {
@@ -57,10 +58,23 @@ const handleRemoveTrackerEvent = (userUid, trackerUid) => {
   };
 };
 
-const handleEditTrackerEvent = tracker => ({
-  type: constants.APPLICATION__PANEL__EDIT_TRACKER,
-  data: tracker
-});
+// const handleEditTrackerEvent = (tracker, isNew) => ({
+//   type: constants.APPLICATION__PANEL__EDIT_TRACKER,
+//   data: { tracker, isNew }
+// });
+
+const handleEditTrackerEvent = (tracker, isNew) => {
+  if (!tracker) {
+    tracker = {} // eslint-disable-line no-param-reassign
+  }
+  if (isNew) {
+    tracker.uid = `temp-${uuidv1()}`; // eslint-disable-line no-param-reassign
+  }
+  return ({
+    type: constants.APPLICATION__PANEL__EDIT_TRACKER,
+    data: { tracker, isNew }
+  });
+};
 
 export const handleLoadTrackers = handleLoadTrackersEvent;
 export const handleSetActiveTracker = handleSetActiveTrackerEvent;

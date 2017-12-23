@@ -69,23 +69,24 @@ class Trackers extends React.Component {
       newTrackers.forEach(tracker => trackers.push(tracker));
     }
 
-    console.log('newTrackers', newTrackers.length);
+    // console.log('newTrackers', newTrackers.length);
 
-    console.log('trackers', trackers);
+    // console.log('trackers', trackers);
 
     return (
       <div className="trackers-list">
         {trackers.map((tracker) => {
-          const editableTrackerIndex = this.props.editableTrackers.findIndex(editableTracker =>
-            editableTracker.uid === tracker.uid);
-          console.log('trackers-list editableTrackerIndex', editableTrackerIndex);
+          const editableTrackerIndex = this.props.editableTrackers.findIndex(
+            editableTracker => editableTracker.uid === tracker.uid);
+          //console.log('trackers-list editableTrackerIndex', editableTrackerIndex);
 
           if (editableTrackerIndex > -1) {
             return (
               <TrackerForm
                 key={`${tracker.uid}-form`}
                 form={`form-${tracker.uid}-tracker-edit`}
-                initialValues={this.props.editableTrackers[editableTrackerIndex]}
+                initialValues={
+                  this.props.editableTrackers[editableTrackerIndex]}
                 onSubmit={saveTrackerOnSubmit}
               />
             );
@@ -96,7 +97,7 @@ class Trackers extends React.Component {
           <div className="button-panel">
             <div
               className="button"
-              onClick={() => this.props.handleEditTracker(`newTracker${newTrackers.length}`)}
+              onClick={() => this.props.handleEditTracker(null, true)}
             >
               Add tracker
             </div>
@@ -107,7 +108,7 @@ class Trackers extends React.Component {
   }
 
   render() {
-    console.log('Trackers this.props', this.props);
+    //console.log('Trackers this.props', this.props);
     return (
       <div className="trackers">
         {this.trackers()}
