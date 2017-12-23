@@ -22,7 +22,7 @@ class Trackers extends React.Component {
     const details = tracker => (
       <div
         key={tracker.uid}
-        className="item"
+        className="list-item hoverable"
         onMouseEnter={() => this.actions.toggleTrackerMenu(tracker.uid)}
         onMouseLeave={() => this.actions.toggleTrackerMenu()}
       >
@@ -69,32 +69,32 @@ class Trackers extends React.Component {
     }
 
     return (
-      <div className="trackers-list">
-        {trackers.map((tracker) => {
+      <div>
+        {trackers.map((tracker, index) => {
           const editableTrackerIndex = this.props.editableTrackers.findIndex(
             editableTracker => editableTracker.uid === tracker.uid);
           if (editableTrackerIndex > -1) {
             return (
-              <TrackerForm
-                key={`${tracker.uid}-form`}
-                form={`form-${tracker.uid}-tracker-edit`}
-                initialValues={
-                  this.props.editableTrackers[editableTrackerIndex]}
-                onSubmit={saveTrackerOnSubmit}
-                cancelEdit={this.props.handleTrackerEditCancel}
-              />
+              <div className="list-item">
+                <TrackerForm
+                  key={`${tracker.uid}-form`}
+                  form={`form-${tracker.uid}-tracker-edit`}
+                  initialValues={
+                    this.props.editableTrackers[editableTrackerIndex]}
+                  onSubmit={saveTrackerOnSubmit}
+                  cancelEdit={this.props.handleTrackerEditCancel}
+                />
+              </div>
             );
           }
           return details(tracker);
         })}
-        <div className="item">
-          <div className="button-panel">
-            <div
-              className="button"
-              onClick={() => this.props.handleEditTracker(null, true)}
-            >
-              Add tracker
-            </div>
+        <div className="button-panel">
+          <div
+            className="button"
+            onClick={() => this.props.handleEditTracker(null, true)}
+          >
+            Add tracker
           </div>
         </div>
       </div>
