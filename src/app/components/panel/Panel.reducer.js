@@ -56,6 +56,16 @@ function panelReducer(state = {}, action) {
         trackers
       };
     }
+    case constants.APPLICATION__PANEL__EDIT_TRACKER_CANCEL: {
+      return {
+        ...state,
+        editableTrackers: state.editableTrackers.filter((tracker) => {
+          if (tracker.uid !== action.data) {
+            return tracker;
+          }
+        })
+      };
+    }
     default: {
       return state;
     }

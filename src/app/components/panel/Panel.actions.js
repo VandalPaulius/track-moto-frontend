@@ -62,8 +62,14 @@ const handleEditTrackerEvent = (tracker, isNew) => {
   });
 };
 
+const handleTrackerEditCancelEvent = uid => ({
+  type: constants.APPLICATION__PANEL__EDIT_TRACKER_CANCEL,
+  data: uid
+});
+
 export const handleLoadTrackers = handleLoadTrackersEvent;
 export const handleSetActiveTracker = handleSetActiveTrackerEvent;
 export const handleSaveTracker = handleSaveTrackerEvent;
 export const handleRemoveTracker = handleRemoveTrackerEvent;
 export const handleEditTracker = handleEditTrackerEvent;
+export const handleTrackerEditCancel = handleTrackerEditCancelEvent;

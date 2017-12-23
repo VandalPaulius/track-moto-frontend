@@ -81,6 +81,7 @@ class Trackers extends React.Component {
                 initialValues={
                   this.props.editableTrackers[editableTrackerIndex]}
                 onSubmit={saveTrackerOnSubmit}
+                cancelEdit={this.props.handleTrackerEditCancel}
               />
             );
           }
@@ -113,6 +114,7 @@ Trackers.propTypes = {
   handleSaveTracker: PropTypes.func.isRequired,
   handleRemoveTracker: PropTypes.func.isRequired,
   handleEditTracker: PropTypes.func.isRequired,
+  handleTrackerEditCancel: PropTypes.func.isRequired,
   trackers: PropTypes.arrayOf(PropTypes.shape({})),
   userUid: PropTypes.string,
   editableTrackers: PropTypes.arrayOf(PropTypes.shape({}))

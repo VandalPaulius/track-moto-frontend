@@ -104,6 +104,7 @@ class Sidebar extends React.Component {
             trackers={this.props.trackers}
             userUid={this.props.user.uid}
             editableTrackers={this.props.editableTrackers}
+            handleTrackerEditCancel={this.props.handleTrackerEditCancel}
           />
         </Modal>
       </div>
@@ -135,6 +136,7 @@ Sidebar.propTypes = {
   handleSaveTracker: PropTypes.func.isRequired,
   handleRemoveTracker: PropTypes.func.isRequired,
   handleEditTracker: PropTypes.func.isRequired,
+  handleTrackerEditCancel: PropTypes.func.isRequired,
   trackers: PropTypes.arrayOf(PropTypes.shape({})),
   user: PropTypes.shape({
     name: PropTypes.string,

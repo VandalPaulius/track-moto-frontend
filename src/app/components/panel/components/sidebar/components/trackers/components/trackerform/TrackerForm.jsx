@@ -27,7 +27,7 @@ function TrackerForm(props) {
       <div className="button-panel">
         <button
           className="button light"
-          onClick={() => console.log('cancel edit')}
+          onClick={() => props.cancelEdit(props.initialValues.uid)}
         >
           Cancel
         </button>
@@ -37,8 +37,16 @@ function TrackerForm(props) {
 }
 
 TrackerForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  cancelEdit: PropTypes.func.isRequired,
+  initialValues: PropTypes.shape({
+    uid: PropTypes.string
+  })
 };
+
+TrackerForm.defaultProps = {
+  initialValues: {}
+}
 
 export default reduxForm({
   enableReinitialize: true
