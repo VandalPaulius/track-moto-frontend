@@ -65,21 +65,14 @@ class Trackers extends React.Component {
     const trackers = [...this.props.trackers];
 
     if (newTrackers.length > 0) {
-      //trackers.concat(newTrackers);
       newTrackers.forEach(tracker => trackers.push(tracker));
     }
-
-    // console.log('newTrackers', newTrackers.length);
-
-    // console.log('trackers', trackers);
 
     return (
       <div className="trackers-list">
         {trackers.map((tracker) => {
           const editableTrackerIndex = this.props.editableTrackers.findIndex(
             editableTracker => editableTracker.uid === tracker.uid);
-          //console.log('trackers-list editableTrackerIndex', editableTrackerIndex);
-
           if (editableTrackerIndex > -1) {
             return (
               <TrackerForm
@@ -108,7 +101,6 @@ class Trackers extends React.Component {
   }
 
   render() {
-    //console.log('Trackers this.props', this.props);
     return (
       <div className="trackers">
         {this.trackers()}

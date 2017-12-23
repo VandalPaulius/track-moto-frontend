@@ -167,12 +167,9 @@ Map.defaultProps = {
   mapData: []
 };
 
-const mapStateToProps = (state) => {
-  //console.log('Map state', state);
-  return ({
-    mapData: state.map.mapData,
-  });
-};
+const mapStateToProps = state => ({
+  mapData: state.map.mapData,
+});
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(mapActions, dispatch)

@@ -31,17 +31,7 @@ const handleSetActiveTrackerEvent = uid => ({
 
 const handleSaveTrackerEvent = (userUid, formData) => {
   return (dispatch) => {
-    // dev start
-    console.log('formData', formData);
     const data = formData;
-    // if ()
-
-    // const data = {
-    //   ...formData,
-    //   uid: formData.uid + formData.uid
-    // }
-
-    // dev end
 
     dispatch({
       type: constants.APPLICATION__PANEL__SAVE_TRACKER,
@@ -59,14 +49,9 @@ const handleRemoveTrackerEvent = (userUid, trackerUid) => {
   };
 };
 
-// const handleEditTrackerEvent = (tracker, isNew) => ({
-//   type: constants.APPLICATION__PANEL__EDIT_TRACKER,
-//   data: { tracker, isNew }
-// });
-
 const handleEditTrackerEvent = (tracker, isNew) => {
   if (!tracker) {
-    tracker = {} // eslint-disable-line no-param-reassign
+    tracker = {}; // eslint-disable-line no-param-reassign
   }
   if (isNew) {
     tracker.uid = `temp-${uuidv1()}`; // eslint-disable-line no-param-reassign
