@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Styles } from './assets'; // eslint-disable-line
+import { Modal } from '../modal';
+import { Trackers as TrackerSettings } from './components';
 
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      userMenuExpanded: false
+      userMenuExpanded: false,
+      isTrackerSettingsOpen: true//false
     };
 
     this.actions = {
@@ -15,6 +18,12 @@ class Sidebar extends React.Component {
         this.setState(state => ({
           ...state,
           userMenuExpanded: isOpen
+        }));
+      },
+      toggleTrackerSettings: (isOpen) => {
+        this.setState(state => ({
+          ...state,
+          isTrackerSettingsOpen: isOpen
         }));
       }
     };
@@ -25,8 +34,11 @@ class Sidebar extends React.Component {
   }
 
   userMenu() {
-    const menuItem = content => (
-      <div>
+    const menuItem = (content, clickAction) => (
+      <div
+        className="item"
+        onClick={clickAction}
+      >
         {content}
       </div>
     );
@@ -46,30 +58,9 @@ class Sidebar extends React.Component {
           (
             <div onMouseLeave={() => this.actions.toggleUserMenu(false)}>
               {userName(() => this.actions.toggleUserMenu(false))}
-              {menuItem(
-                <div
-                  className="item"
-                  onClick={() => console.log('open trackers modal')}
-                >
-                  trackers
-                </div>
-              )}
-              {menuItem(
-                <div
-                  className="item"
-                  onClick={() => console.log('open settings modal')}
-                >
-                  settings
-                </div>
-              )}
-              {menuItem(
-                <div
-                  className="item"
-                  onClick={() => this.props.handleLogout(this.props.user.uid)}
-                >
-                  log out
-                </div>
-              )}
+              {menuItem('trackers', () => this.actions.toggleTrackerSettings(true))}
+              {menuItem('settings', () => console.log('open settings modal'))}
+              {menuItem('log out', () => this.props.handleLogout())}
             </div>
           ) :
           userName(() => this.actions.toggleUserMenu(true))
@@ -99,6 +90,27 @@ class Sidebar extends React.Component {
     );
   }
 
+  modalWrapper() {
+    return (
+      <div>
+        <Modal
+          isOpen={this.state.isTrackerSettingsOpen}
+          onClose={() => this.actions.toggleTrackerSettings(false)}
+        >
+          <TrackerSettings
+            handleSaveTracker={this.props.handleSaveTracker}
+            handleRemoveTracker={this.props.handleRemoveTracker}
+            handleEditTracker={this.props.handleEditTracker}
+            trackers={this.props.trackers}
+            userUid={this.props.user.uid}
+            editableTrackers={this.props.editableTrackers}
+            handleTrackerEditCancel={this.props.handleTrackerEditCancel}
+          />
+        </Modal>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="sidebar">
@@ -112,6 +124,7 @@ class Sidebar extends React.Component {
             track-moto.com
           </a>
         </div>
+        {this.modalWrapper()}
       </div>
     );
   }
@@ -120,16 +133,22 @@ class Sidebar extends React.Component {
 Sidebar.propTypes = {
   handleLogout: PropTypes.func.isRequired,
   handleLoadTrackers: PropTypes.func.isRequired,
+  handleSaveTracker: PropTypes.func.isRequired,
+  handleRemoveTracker: PropTypes.func.isRequired,
+  handleEditTracker: PropTypes.func.isRequired,
+  handleTrackerEditCancel: PropTypes.func.isRequired,
   trackers: PropTypes.arrayOf(PropTypes.shape({})),
   user: PropTypes.shape({
     name: PropTypes.string,
     uid: PropTypes.string
-  })
+  }),
+  editableTrackers: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 Sidebar.defaultProps = {
   trackers: [],
-  user: {}
+  user: {},
+  editableTrackers: []
 };
 
 export default Sidebar;
