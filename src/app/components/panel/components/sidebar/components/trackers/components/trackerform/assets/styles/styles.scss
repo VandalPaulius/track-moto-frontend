@@ -1,7 +1,10 @@
 $darkgrey: rgb(59, 59, 59);
 $activegreen: rgb(87, 180, 25);
 $white: white;
+$black: black;
 $shadow-gray: rgb(90, 90, 90);
+$inactive-gray: rgb(168, 168, 168);
+$unimportant-gray: rgb(95, 95, 95);
 
 * {
   -webkit-box-sizing: border-box;
@@ -29,6 +32,7 @@ $shadow-gray: rgb(90, 90, 90);
     padding: 5px 7px 5px 7px;
     box-shadow: 0px 1px 2px $shadow-gray;
     background-color: $white;
+    margin-left: 5px;
 
     &.bright {
       background-color: $white;
@@ -36,10 +40,12 @@ $shadow-gray: rgb(90, 90, 90);
 
     &.dark {
       background-color: $darkgrey;
+      color: $white;
     }
 
     &:hover {
       background-color: $activegreen;
+      color: $black;
       box-shadow: 0px 1px 5px $shadow-gray;
     }
   }
@@ -47,6 +53,6 @@ $shadow-gray: rgb(90, 90, 90);
   & .button-panel {
     margin-top: 5px;
     display: flex;
-    justify-content: left;
+    justify-content: flex-end;
   }
 }

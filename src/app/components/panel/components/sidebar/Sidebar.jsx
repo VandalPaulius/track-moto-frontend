@@ -10,7 +10,7 @@ class Sidebar extends React.Component {
 
     this.state = {
       userMenuExpanded: false,
-      isTrackerSettingsOpen: true//false
+      isTrackerSettingsOpen: false
     };
 
     this.actions = {
