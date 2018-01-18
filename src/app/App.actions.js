@@ -45,21 +45,25 @@ const handleRegisterEvent = (userData) => {
       return;
     }
 
-    fetch(`${process.env.REACT_APP_API_URL}/auth`, {
+    fetch(`${process.env.REACT_APP_API_URL}/user`, {
       method: 'POST',
       mode: 'cors',
+      credentials: 'include',
+      //headers: new Headers({ 'Content-Type': 'application/json' }),
       headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify({
         email: userData.email,
-        username: userData.userName,
+        //username: userData.userName,
         password: userData.password
       })
     })
       .then((res) => {
+        console.log('res', res);
         if (res.ok) {
           res.json().then((body) => {
-            dispatch(setUserData(body));
-            dispatch(setAuthorizedStatus(true));
+            console.log('body', body);
+            // dispatch(setUserData(body));
+            // dispatch(setAuthorizedStatus(true));
           });
         } else {
           res.text().then(text => coreMessageEmit('error', `Error: ${text}`));
